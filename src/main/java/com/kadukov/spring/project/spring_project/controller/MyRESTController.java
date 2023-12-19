@@ -1,6 +1,7 @@
 package com.kadukov.spring.project.spring_project.controller;
 
 import com.kadukov.spring.project.spring_project.entity.Task;
+import com.kadukov.spring.project.spring_project.entity.User;
 import com.kadukov.spring.project.spring_project.service.TaskService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +27,14 @@ public class MyRESTController {
         if(httpSession.getAttribute("username")==null){
             return "redirect:/";
         }
+        User user = (User) httpSession.getAttribute("username");
+        model.addAttribute("username", user.getUsername());
         List<Task> tasks = taskService.getTasks();
+        if(((String)httpSession.getAttribute("sortList")).equals("priority"))tasks.sort(Task.priorityComparator);
+        if(((String)httpSession.getAttribute("sortList")).equals("title")) tasks.sort(Task.titleComparator);
+        if(((String)httpSession.getAttribute("sortList")).equals("description")) tasks.sort(Task.descriptionComparator);
+        if(((String)httpSession.getAttribute("sortList")).equals("deadline")) tasks.sort(Task.deadlineComparator);
+        if(((String)httpSession.getAttribute("sortList")).equals("is_done")) tasks.sort(Task.statusComparator);
         model.addAttribute("tasks", tasks);
         return "start";
     }
@@ -39,7 +47,6 @@ public class MyRESTController {
         Task task = new Task();
         task.setId(0); task.setIs_done(false);
         model.addAttribute("task", task);
-        System.out.println(task);
         return "showTask";
     }
 
@@ -49,6 +56,8 @@ public class MyRESTController {
             return "redirect:/";
         }
         System.out.println(task);
+        User user = (User) httpSession.getAttribute("username");
+        task.setOwner(user.getUsername());
         taskService.saveTask(task);
         return "redirect:/task-tracker/";
     }
@@ -72,4 +81,12 @@ public class MyRESTController {
         return "redirect:/task-tracker/";
     }
 
+    @RequestMapping("/logout")
+    public String exit(){
+        if(httpSession.getAttribute("username")==null){
+            return "redirect:/";
+        }
+        httpSession.removeAttribute("username");
+        return "redirect:/";
+    }
 }

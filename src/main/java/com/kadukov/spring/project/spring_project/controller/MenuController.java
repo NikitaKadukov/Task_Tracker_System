@@ -54,6 +54,7 @@ public class MenuController {
     public String login(@ModelAttribute("task") User user, Model model, HttpSession session){
         if(userService.valid(user)){
             session.setAttribute("username", user);
+            session.setAttribute("sortList", "default");
             return "redirect:/task-tracker/";
         }
         else{

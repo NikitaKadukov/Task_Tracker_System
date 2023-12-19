@@ -4,13 +4,14 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            margin: 20px;
+            margin: 21px;
             background-color: #f4f4f4;
         }
 
         form {
             max-width: 400px;
             margin: 0 auto;
+            margin-top: 40px;
             background-color: #fff;
             padding: 20px;
             border-radius: 8px;
@@ -21,6 +22,20 @@
             display: block;
             margin-bottom: 8px;
             font-weight: bold;
+        }
+        a {
+            color: #3498db;
+            text-decoration: none;
+            margin-right: 10px;
+            transition: color 0.3s ease-in-out;
+            cursor: pointer;
+            display: inline-block;
+            padding: 8px 12px;
+            padding-left: 12%;
+            padding-right: 12%;
+            border-radius: 4px;
+            border: 1px solid #3498db;
+            text-align: center;
         }
 
         input[type="text"],
@@ -49,8 +64,46 @@
         input[type="submit"]:hover {
             background-color: #45a049;
         }
+        header {
+            background-color: #3498db;
+            margin-left: -21px;
+            margin-right: -21px;
+            margin-top: -21px;
+            padding: 7px;
+            text-align: center;
+            color: #fff;
+            white-space: nowrap;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            white-space: nowrap;
+        }
+
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            transition: color 0.3s ease-in-out;
+            border: none;
+            white-space: nowrap;
+        }
+
+        nav a:hover {
+            background-color: #d6f5fc;
+            color: #2d6675;
+        }
     </style>
 </head>
+<header>
+    <nav>
+        <a href="/task-tracker/">На главную</a>
+        <a href="/profile">Профиль</a>
+        <a href="/about">О сайте</a>
+        <a href="/task-tracker/logout">Выйти</a>
+    </nav>
+</header>
 <body>
 
 <form action="/task-tracker/saveTask" method="post" th:object="${task}">
@@ -59,7 +112,6 @@
     DESCRIPTION <input type="text" th:field="*{description}"/><br><br>
     DEADLINE <input type="date" th:field="*{deadline}"/><br><br>
     PRIORITY <input type="number" th:field="*{priority}"/><br><br>
-    OWNER <input type="text" th:field="*{owner}"/><br><br>
     <input type="submit" value="OK"/>
 </form>
 

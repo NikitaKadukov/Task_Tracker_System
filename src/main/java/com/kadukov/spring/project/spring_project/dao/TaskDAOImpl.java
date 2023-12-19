@@ -1,6 +1,8 @@
 package com.kadukov.spring.project.spring_project.dao;
 
 import com.kadukov.spring.project.spring_project.entity.Task;
+import com.kadukov.spring.project.spring_project.entity.User;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -14,9 +16,16 @@ public class TaskDAOImpl implements TaskDAO{
     @Autowired
     private EntityManager entityManager;
 
+    @Autowired
+    HttpSession httpSession;
+
     @Override
     public List<Task> getTasks() {
-        List<Task> taskList = entityManager.createQuery("from Task").getResultList();
+        User user = (User)httpSession.getAttribute("username");
+        String username = user.getUsername();
+        Query query = entityManager.createQuery("from Task where owner = :user");
+        query.setParameter("user", username);
+        List<Task> taskList = query.getResultList();
         return taskList;
     }
 

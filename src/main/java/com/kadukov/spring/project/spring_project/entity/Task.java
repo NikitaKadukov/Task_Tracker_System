@@ -3,11 +3,12 @@ package com.kadukov.spring.project.spring_project.entity;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
+import java.util.Comparator;
 import java.util.Date;
 
 @Entity
 @Table(name = "tasks")
-public class Task {
+public class Task{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column
@@ -37,6 +38,13 @@ public class Task {
         this.owner = owner;
         this.deadline = deadline;
     }
+
+    public static Comparator<Task> priorityComparator = Comparator.comparingInt(Task::getPriority).reversed();
+    public static Comparator<Task> titleComparator = Comparator.comparing(Task::getTitle);
+    public static Comparator<Task> statusComparator = Comparator.comparing(Task::isIs_done);
+    public static Comparator<Task> deadlineComparator = Comparator.comparing(Task::getDeadline);
+    public static Comparator<Task> descriptionComparator = Comparator.comparing(Task::getDescription);
+
 
     public Integer getId() {
         return id;

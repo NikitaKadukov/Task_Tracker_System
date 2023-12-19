@@ -17,6 +17,26 @@
             color: #555;
         }
 
+        h1.to_do_list {
+            color: #333;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .title-left {
+            white-space: nowrap;
+            flex-grow: 20;
+            padding-left: 5%;
+            text-align: center;
+        }
+
+        .title-right {
+            white-space: nowrap;
+            flex-grow: 1;
+            color: #555;
+            font-size: 20px;
+        }
+
         table {
             width: 100%;
             border-collapse: collapse;
@@ -40,12 +60,11 @@
             background-color: #f9f9f9;
         }
 
-        a {
+        a.head, a.oper{
             color: #3498db;
             text-decoration: none;
             margin-right: 10px;
             transition: color 0.3s ease-in-out;
-
             cursor: pointer;
             display: inline-block;
             padding: 8px 12px;
@@ -77,20 +96,60 @@
         input[type="button"]:hover {
             background-color: #45a049;
         }
+
+        header {
+            background-color: #3498db;
+            margin-left: -21px;
+            margin-right: -21px;
+            margin-top: -21px;
+            padding: 7px;
+            text-align: center;
+            color: #fff;
+            white-space: nowrap;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            white-space: nowrap;
+        }
+
+        nav a.head {
+            color: #fff;
+            text-decoration: none;
+            transition: color 0.3s ease-in-out;
+            border: none;
+            white-space: nowrap;
+        }
+
+        nav a:hover {
+            background-color: #d6f5fc;
+            color: #2d6675;
+        }
     </style>
 </head>
+<header>
+    <nav>
+        <a href="/task-tracker/" class = "head">На главную</a>
+        <a href="/profile" class = "head">Профиль</a>
+        <a href="/about" class = "head">О сайте</a>
+        <a href="/task-tracker/logout" class = "head">Выйти</a>
+    </nav>
+</header>
 <body>
-<h1>Список дел: </h1>
-<h2 th:text="${curUser}"></h2>
+<h1 class="to_do_list">
+    <span class="title-left">Список дел</span>
+    <span class="title-right" th:text="${username}"></span>
+</h1>
 <table>
     <thead>
     <tr>
-        <th>TITLE</th>
-        <th>DESCRIPTION</th>
-        <th>DEADLINE</th>
-        <th>PRIORITY</th>
-        <th>IS_DONE</th>
-        <th>OWNER</th>
+        <th><a href="/sorting/sortTasks/title">TITLE</a></th>
+        <th><a href="/sorting/sortTasks/description">DESCRIPTION</a></th>
+        <th><a href="/sorting/sortTasks/deadline">DEADLINE</a></th>
+        <th><a href="/sorting/sortTasks/priority">PRIORITY</a></th>
+        <th><a href="/sorting/sortTasks/is_done">IS_DONE</a></th>
         <th>Oper</th>
     </tr>
     </thead>
@@ -102,10 +161,9 @@
         <td th:text="${task.deadline}"></td>
         <td th:text="${task.priority}"></td>
         <td th:text="${task.is_done}"></td>
-        <td th:text="${task.owner}"></td>
         <td>
-            <a th:href="@{updateTask/{id}(id=${task.id})}">UPDATE</a>
-            <a th:href="@{deleteTask/{id}(id=${task.id})}">DELETE</a>
+            <a th:href="@{updateTask/{id}(id=${task.id})}" class = "oper">UPDATE</a>
+            <a th:href="@{deleteTask/{id}(id=${task.id})}" class = "oper">DELETE</a>
         </td>
     </tr>
     </tbody>
