@@ -46,4 +46,11 @@ public class TaskDAOImpl implements TaskDAO{
         query.setParameter("TaskId", id);
         query.executeUpdate();
     }
+
+    @Override
+    public void markTask(int id) {
+        Task task = getTask(id);
+        task.setIs_done(!task.isIs_done());
+        saveTask(task);
+    }
 }

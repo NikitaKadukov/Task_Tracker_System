@@ -8,6 +8,8 @@ public interface TaskDAO {
     public List<Task> getTasks();
     public void saveTask(Task task);
 
+    public void markTask(int id);
+
     public Task getTask(int id);
 
     public void deleteTask(int id);

@@ -1,5 +1,6 @@
 package com.kadukov.spring.project.spring_project.controller;
-
+import java.time.temporal.ChronoUnit;
+import java.time.LocalDate;
 import com.kadukov.spring.project.spring_project.entity.Task;
 import com.kadukov.spring.project.spring_project.entity.User;
 import com.kadukov.spring.project.spring_project.service.TaskService;
@@ -88,5 +89,14 @@ public class MyRESTController {
         }
         httpSession.removeAttribute("username");
         return "redirect:/";
+    }
+
+    @RequestMapping("/markTask/{id}")
+    public String markTask(@PathVariable int id){
+        if(httpSession.getAttribute("username")==null){
+            return "redirect:/";
+        }
+        taskService.markTask(id);
+        return "redirect:/task-tracker/";
     }
 }

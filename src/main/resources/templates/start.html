@@ -127,6 +127,50 @@
             background-color: #d6f5fc;
             color: #2d6675;
         }
+
+        .loh {
+            color: #3f0909;
+            background-color: #342d1e;
+            padding: 8px 12px;
+            border-radius: 4px;
+            box-shadow: 0 0 10px rgba(80, 58, 17, 0.5);
+        }
+
+        .ending-soon {
+            color: white;
+            background-color: orange;
+            padding: 8px 12px;
+            border-radius: 4px;
+            box-shadow: 0 0 10px rgba(255, 165, 0, 0.5); /* Тень оранжевого цвета */
+            animation: pulse2 30s infinite; /* Анимация мерцания */
+        }
+
+        .ending-soon:hover {
+            background-color: darkorange; /* Изменение цвета при наведении */
+        }
+        .overdue {
+            color: white;
+            background-color: red;
+            padding: 8px 12px;
+            border-radius: 4px;
+            box-shadow: 0 0 10px rgba(255, 0, 0, 0.5); /* Тень красного цвета */
+            animation: pulse 4s infinite; /* Анимация мерцания */
+        }
+
+
+        @keyframes pulse2 {
+            0% { background-color: orange; }
+            50% { background-color: rgba(229, 151, 7, 0.7); }
+            100% { background-color: orange; }
+        }
+        @keyframes pulse {
+            0% { background-color: red; }
+            50% { background-color: #930404; }
+            100% { background-color: red; }
+        }
+        .overdue:hover {
+            background-color: darkred; /* Изменение цвета при наведении */
+        }
     </style>
 </head>
 <header>
@@ -145,6 +189,51 @@
 <table>
     <thead>
     <tr>
+        <th><h2>IS_DONE</h2></th>
+        <th><a href="/sorting/sortTasks/title">TITLE</a></th>
+        <th><a href="/sorting/sortTasks/description">DESCRIPTION</a></th>
+        <th><a href="/sorting/sortTasks/deadline">DEADLINE</a></th>
+        <th><a href="/sorting/sortTasks/priority">PRIORITY</a></th>
+        <th><a href="/sorting/sortTasks/is_done">IS_DONE</a></th>
+        <th>Oper</th>
+    </tr>
+    </thead>
+    <script>
+        function confirmDelete(taskId) {
+            var result = window.confirm("Вы уверены, что хотите удалить задачу?");
+
+            if (result) {
+                window.location.href = '/task-tracker/deleteTask/' + taskId;
+            }
+        }
+    </script>
+    <tbody>
+    <tr th:each="task : ${tasks}" th:if="${not task.is_done}"
+        th:class="${#temporals.format(task.deadline, 'yyyy-MM-dd') lt #temporals.format(#temporals.createNow(), 'yyyy-MM-dd')} ? 'overdue': ''"
+        th:classappend="${#temporals.format(task.deadline.minusDays(3), 'yyyy-MM-dd') lt #temporals.format(#temporals.createNow(), 'yyyy-MM-dd')} ? 'ending-soon': ''">
+        <td><a class="oper" th:href="@{markTask/{id}(id=${task.id})}" >Выполнено</a></td>
+        <td th:text="${task.title}"></td>
+        <td th:text="${task.description}"></td>
+        <td th:text="${task.deadline}"></td>
+        <td th:text="${task.priority}"></td>
+        <td th:text="${task.is_done}"></td>
+        <td>
+            <a th:href="@{updateTask/{id}(id=${task.id})}" class = "oper">UPDATE</a>
+            <a href="#" class="oper" th:onclick="'confirmDelete(' + ${task.id} + ')'" >DELETE</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+<input type="button" value="Добавить задание" onclick="window.location.href = 'addNewTask'"/>
+
+<h1 class="to_do_list">
+    <span class="title-left">Выполненные задачи:</span>
+</h1>
+<table>
+    <thead>
+    <tr>
+        <th><h2>IS_DONE</h2></th>
         <th><a href="/sorting/sortTasks/title">TITLE</a></th>
         <th><a href="/sorting/sortTasks/description">DESCRIPTION</a></th>
         <th><a href="/sorting/sortTasks/deadline">DEADLINE</a></th>
@@ -154,23 +243,19 @@
     </tr>
     </thead>
     <tbody>
-    <tr th:each="task : ${tasks}">
-
+    <tr th:each="task : ${tasks}" th:if="${task.is_done}">
+        <td><a class="oper" th:href="@{markTask/{id}(id=${task.id})}" >Выполнено</a></td>
         <td th:text="${task.title}"></td>
         <td th:text="${task.description}"></td>
         <td th:text="${task.deadline}"></td>
         <td th:text="${task.priority}"></td>
         <td th:text="${task.is_done}"></td>
         <td>
-            <a th:href="@{updateTask/{id}(id=${task.id})}" class = "oper">UPDATE</a>
-            <a th:href="@{deleteTask/{id}(id=${task.id})}" class = "oper">DELETE</a>
+            <a href="#" class="oper" th:onclick="'confirmDelete(' + ${task.id} + ')'" >DELETE</a>
         </td>
     </tr>
     </tbody>
 </table>
-
-<input type="button" value="Добавить задание" onclick="window.location.href = 'addNewTask'"/>
-
 
 
 </body>
