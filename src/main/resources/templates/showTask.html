@@ -108,14 +108,12 @@
 
 <form action="/task-tracker/saveTask" method="post" th:object="${task}">
     <input type="hidden" th:field="*{id}"/>
-    TITLE <input type="text" th:field="*{title}"/><br><br>
+    TITLE <input type="text" th:field="*{title}"/><span th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></span><br><br>
     DESCRIPTION <input type="text" th:field="*{description}"/><br><br>
-    DEADLINE <input type="date" th:field="*{deadline}"/><br><br>
-    PRIORITY <input type="number" th:field="*{priority}"/><br><br>
+    DEADLINE <input type="date" th:field="*{deadline}"/><span th:if="${#fields.hasErrors('deadline')}" th:errors="*{deadline}"></span><br><br>
+    PRIORITY <input type="number" th:field="*{priority}"/><span th:if="${#fields.hasErrors('priority')}" th:errors="*{priority}"></span><br><br>
     <input type="submit" value="OK"/>
 </form>
-
-<!-- Другой контент страницы, если нужен -->
 
 </body>
 </html>

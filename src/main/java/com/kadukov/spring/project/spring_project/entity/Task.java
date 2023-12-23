@@ -1,6 +1,10 @@
 package com.kadukov.spring.project.spring_project.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 
 import java.time.LocalDate;
 import java.util.Comparator;
@@ -14,16 +18,21 @@ public class Task{
     @Column
     private Integer id;
     @Column
+    @Size(min = 2, message = "Название должно состоять хотя бы из 2 символов")
+    @NotBlank
     private String title;
     @Column
     private String description;
     @Column
+    @Min(value = 0, message = "Приоритет не должен быть меньше 0")
+    @NotNull(message = "Пропишите приоритет")
     private Integer priority;
     @Column
     private boolean is_done;
     @Column
     private String owner;
     @Column
+    @NotNull(message = "Пропишите дату")
     private LocalDate deadline;
 
     public Task() {
@@ -41,7 +50,6 @@ public class Task{
 
     public static Comparator<Task> priorityComparator = Comparator.comparingInt(Task::getPriority).reversed();
     public static Comparator<Task> titleComparator = Comparator.comparing(Task::getTitle);
-    public static Comparator<Task> statusComparator = Comparator.comparing(Task::isIs_done);
     public static Comparator<Task> deadlineComparator = Comparator.comparing(Task::getDeadline);
     public static Comparator<Task> descriptionComparator = Comparator.comparing(Task::getDescription);
 

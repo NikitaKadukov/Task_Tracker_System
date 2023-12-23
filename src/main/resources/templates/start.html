@@ -194,7 +194,6 @@
         <th><a href="/sorting/sortTasks/description">DESCRIPTION</a></th>
         <th><a href="/sorting/sortTasks/deadline">DEADLINE</a></th>
         <th><a href="/sorting/sortTasks/priority">PRIORITY</a></th>
-        <th><a href="/sorting/sortTasks/is_done">IS_DONE</a></th>
         <th>Oper</th>
     </tr>
     </thead>
@@ -216,7 +215,6 @@
         <td th:text="${task.description}"></td>
         <td th:text="${task.deadline}"></td>
         <td th:text="${task.priority}"></td>
-        <td th:text="${task.is_done}"></td>
         <td>
             <a th:href="@{updateTask/{id}(id=${task.id})}" class = "oper">UPDATE</a>
             <a href="#" class="oper" th:onclick="'confirmDelete(' + ${task.id} + ')'" >DELETE</a>
@@ -238,7 +236,6 @@
         <th><a href="/sorting/sortTasks/description">DESCRIPTION</a></th>
         <th><a href="/sorting/sortTasks/deadline">DEADLINE</a></th>
         <th><a href="/sorting/sortTasks/priority">PRIORITY</a></th>
-        <th><a href="/sorting/sortTasks/is_done">IS_DONE</a></th>
         <th>Oper</th>
     </tr>
     </thead>
@@ -249,7 +246,6 @@
         <td th:text="${task.description}"></td>
         <td th:text="${task.deadline}"></td>
         <td th:text="${task.priority}"></td>
-        <td th:text="${task.is_done}"></td>
         <td>
             <a href="#" class="oper" th:onclick="'confirmDelete(' + ${task.id} + ')'" >DELETE</a>
         </td>

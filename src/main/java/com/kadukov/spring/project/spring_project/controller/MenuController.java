@@ -55,6 +55,8 @@ public class MenuController {
         if(userService.valid(user)){
             session.setAttribute("username", user);
             session.setAttribute("sortList", "default");
+            session.setAttribute("sortListLast", "default");
+            session.setAttribute("chetSort", false);
             return "redirect:/task-tracker/";
         }
         else{

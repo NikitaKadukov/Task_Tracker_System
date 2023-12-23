@@ -5,12 +5,15 @@ import com.kadukov.spring.project.spring_project.entity.Task;
 import com.kadukov.spring.project.spring_project.entity.User;
 import com.kadukov.spring.project.spring_project.service.TaskService;
 import jakarta.servlet.http.HttpSession;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Collections;
 import java.util.List;
 
 @Controller
@@ -31,11 +34,39 @@ public class MyRESTController {
         User user = (User) httpSession.getAttribute("username");
         model.addAttribute("username", user.getUsername());
         List<Task> tasks = taskService.getTasks();
-        if(((String)httpSession.getAttribute("sortList")).equals("priority"))tasks.sort(Task.priorityComparator);
-        if(((String)httpSession.getAttribute("sortList")).equals("title")) tasks.sort(Task.titleComparator);
-        if(((String)httpSession.getAttribute("sortList")).equals("description")) tasks.sort(Task.descriptionComparator);
-        if(((String)httpSession.getAttribute("sortList")).equals("deadline")) tasks.sort(Task.deadlineComparator);
-        if(((String)httpSession.getAttribute("sortList")).equals("is_done")) tasks.sort(Task.statusComparator);
+        String lastSorted = (String) httpSession.getAttribute("sortListLast");
+        String curSorted = (String)httpSession.getAttribute("sortList");
+
+        boolean chetSort = (boolean) httpSession.getAttribute("chetSort");
+
+        if (curSorted.equals("priority")) {
+            tasks.sort(Task.priorityComparator);
+        }
+        if (curSorted.equals("title")) {
+            tasks.sort(Task.titleComparator);
+        }
+        if (curSorted.equals("description")) {
+            tasks.sort(Task.descriptionComparator);
+        }
+        if (curSorted.equals("deadline")) {
+            tasks.sort(Task.deadlineComparator);
+        }
+
+        if(curSorted.equals(lastSorted) && !curSorted.equals("default")){
+            chetSort = !chetSort;
+            if(chetSort) {
+                System.out.println(lastSorted + "  " + curSorted);
+                Collections.reverse(tasks);
+            }
+        }
+        else{
+            chetSort = false;
+        }
+        httpSession.removeAttribute("sortListLast");
+        httpSession.setAttribute("sortListLast", (String)httpSession.getAttribute("sortList"));
+        httpSession.removeAttribute("chetSort");
+        httpSession.setAttribute("chetSort", chetSort);
+
         model.addAttribute("tasks", tasks);
         return "start";
     }
@@ -52,15 +83,20 @@ public class MyRESTController {
     }
 
     @RequestMapping("/saveTask")
-    public String saveTask(@ModelAttribute("task") Task task){
+    public String saveTask(@Valid @ModelAttribute("task") Task task, BindingResult bindingResult){
         if(httpSession.getAttribute("username")==null){
             return "redirect:/";
         }
-        System.out.println(task);
-        User user = (User) httpSession.getAttribute("username");
-        task.setOwner(user.getUsername());
-        taskService.saveTask(task);
-        return "redirect:/task-tracker/";
+        System.out.println(task.getDeadline());
+        if(bindingResult.hasErrors()){
+            return "showTask";
+        }
+        else {
+            User user = (User) httpSession.getAttribute("username");
+            task.setOwner(user.getUsername());
+            taskService.saveTask(task);
+            return "redirect:/task-tracker/";
+        }
     }
 
     @RequestMapping("/updateTask/{id}")
