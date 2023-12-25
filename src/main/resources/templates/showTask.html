@@ -1,4 +1,6 @@
 <!DOCTYPE html>
+
+
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <style>
@@ -94,7 +96,23 @@
             background-color: #d6f5fc;
             color: #2d6675;
         }
+        .error-message {
+            color: red;
+            font-size: 14px;
+            margin-top: 5px;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
     </style>
+
 </head>
 <header>
     <nav>
@@ -108,10 +126,14 @@
 
 <form action="/task-tracker/saveTask" method="post" th:object="${task}">
     <input type="hidden" th:field="*{id}"/>
-    TITLE <input type="text" th:field="*{title}"/><span th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></span><br><br>
+    TITLE <input type="text" th:field="*{title}"/><span th:if="${#fields.hasErrors('title')}" th:errors="*{title}" class="error-message"></span><br><br>
     DESCRIPTION <input type="text" th:field="*{description}"/><br><br>
-    DEADLINE <input type="date" th:field="*{deadline}"/><span th:if="${#fields.hasErrors('deadline')}" th:errors="*{deadline}"></span><br><br>
-    PRIORITY <input type="number" th:field="*{priority}"/><span th:if="${#fields.hasErrors('priority')}" th:errors="*{priority}"></span><br><br>
+    DEADLINE <input type="date" th:value="*{deadline}" id="deadline" name="deadline"/><span th:if="${#fields.hasErrors('deadline')}" th:errors="*{deadline}" class="error-message"></span><br><br>
+    <span th:if="${task.ref_task==0}">ПРИОРИТЕТ</span><input type="number" th:field="*{priority}" th:if="${task.ref_task==0}"/><span th:if="${#fields.hasErrors('priority') and task.ref_task==0}" th:errors="*{priority} " class="error-message"><br><br></span>
+    <input type="hidden" th:field="*{priority}" th:if="${task.ref_task!=0}"/>
+
+    <input type="hidden" th:field="*{category}"/>
+    <input type="hidden" th:field="*{ref_task}"/>
     <input type="submit" value="OK"/>
 </form>
 

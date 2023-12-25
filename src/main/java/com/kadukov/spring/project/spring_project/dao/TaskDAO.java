@@ -5,7 +5,7 @@ import com.kadukov.spring.project.spring_project.entity.Task;
 import java.util.List;
 
 public interface TaskDAO {
-    public List<Task> getTasks();
+    public List<Task> getTasks(boolean root);
     public void saveTask(Task task);
 
     public void markTask(int id);

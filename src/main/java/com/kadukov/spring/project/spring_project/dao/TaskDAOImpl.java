@@ -20,10 +20,12 @@ public class TaskDAOImpl implements TaskDAO{
     HttpSession httpSession;
 
     @Override
-    public List<Task> getTasks() {
+    public List<Task> getTasks(boolean root) {
         User user = (User)httpSession.getAttribute("username");
         String username = user.getUsername();
-        Query query = entityManager.createQuery("from Task where owner = :user");
+        Query query;
+        if(root) query = entityManager.createQuery("from Task where owner = :user AND ref_task = 0");
+        else query = entityManager.createQuery("from Task where owner = :user AND ref_task <> 0");
         query.setParameter("user", username);
         List<Task> taskList = query.getResultList();
         return taskList;
@@ -45,6 +47,14 @@ public class TaskDAOImpl implements TaskDAO{
         Query query = entityManager.createQuery("delete from Task where id = :TaskId");
         query.setParameter("TaskId", id);
         query.executeUpdate();
+        List<Task> taskList = getTasks(false);
+        for(Task task: taskList){
+            if(task.getRef_task()==id){
+                query = entityManager.createQuery("delete from Task where id = :TaskId");
+                query.setParameter("TaskId", task.getId());
+                query.executeUpdate();
+            }
+        }
     }
 
     @Override

@@ -33,8 +33,9 @@ public class MyRESTController {
         }
         User user = (User) httpSession.getAttribute("username");
         model.addAttribute("username", user.getUsername());
-        List<Task> tasks = taskService.getTasks();
-        String lastSorted = (String) httpSession.getAttribute("sortListLast");
+        List<Task> tasks = taskService.getTasks(true);
+        List<Task> subTasks = taskService.getTasks(false);
+
         String curSorted = (String)httpSession.getAttribute("sortList");
 
         boolean chetSort = (boolean) httpSession.getAttribute("chetSort");
@@ -52,22 +53,12 @@ public class MyRESTController {
             tasks.sort(Task.deadlineComparator);
         }
 
-        if(curSorted.equals(lastSorted) && !curSorted.equals("default")){
-            chetSort = !chetSort;
-            if(chetSort) {
-                System.out.println(lastSorted + "  " + curSorted);
-                Collections.reverse(tasks);
-            }
+        if(chetSort){
+            Collections.reverse(tasks);
         }
-        else{
-            chetSort = false;
-        }
-        httpSession.removeAttribute("sortListLast");
-        httpSession.setAttribute("sortListLast", (String)httpSession.getAttribute("sortList"));
-        httpSession.removeAttribute("chetSort");
-        httpSession.setAttribute("chetSort", chetSort);
 
         model.addAttribute("tasks", tasks);
+        model.addAttribute("subTasks", subTasks);
         return "start";
     }
 
@@ -77,7 +68,7 @@ public class MyRESTController {
             return "redirect:/";
         }
         Task task = new Task();
-        task.setId(0); task.setIs_done(false);
+        task.setId(0); task.setIs_done(false); task.setCategory("default"); task.setRef_task(0);
         model.addAttribute("task", task);
         return "showTask";
     }
@@ -134,5 +125,16 @@ public class MyRESTController {
         }
         taskService.markTask(id);
         return "redirect:/task-tracker/";
+    }
+
+    @RequestMapping("/addRefTask/{id}")
+    public String addRefTask(@PathVariable int id, Model model){
+        if(httpSession.getAttribute("username")==null){
+            return "redirect:/";
+        }
+        Task task = new Task();
+        task.setId(0); task.setIs_done(false); task.setCategory("none"); task.setRef_task(id);task.setPriority(0);
+        model.addAttribute("task", task);
+        return "showTask";
     }
 }

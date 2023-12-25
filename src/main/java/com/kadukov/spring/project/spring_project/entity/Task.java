@@ -35,10 +35,16 @@ public class Task{
     @NotNull(message = "Пропишите дату")
     private LocalDate deadline;
 
+    @Column
+    private String category;
+
+    @Column
+    private Integer ref_task;
+
     public Task() {
     }
 
-    public Task(Integer id, String title, String description, Integer priority, boolean is_done, String owner, LocalDate deadline) {
+    public Task(Integer id, String title, String description, Integer priority, boolean is_done, String owner, LocalDate deadline, String category, Integer ref_task) {
         this.id = id;
         this.title = title;
         this.description = description;
@@ -46,6 +52,8 @@ public class Task{
         this.is_done = is_done;
         this.owner = owner;
         this.deadline = deadline;
+        this.category = category;
+        this.ref_task = ref_task;
     }
 
     public static Comparator<Task> priorityComparator = Comparator.comparingInt(Task::getPriority).reversed();
@@ -110,6 +118,22 @@ public class Task{
         this.deadline = deadline;
     }
 
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    public Integer getRef_task() {
+        return ref_task;
+    }
+
+    public void setRef_task(Integer ref_task) {
+        this.ref_task = ref_task;
+    }
+
     @Override
     public String toString() {
         return "Task{" +
@@ -120,6 +144,8 @@ public class Task{
                 ", is_done=" + is_done +
                 ", owner='" + owner + '\'' +
                 ", deadline=" + deadline +
+                ", category='" + category + '\'' +
+                ", ref_task=" + ref_task +
                 '}';
     }
 }

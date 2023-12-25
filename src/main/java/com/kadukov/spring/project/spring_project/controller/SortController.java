@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.util.Collections;
 import java.util.List;
 
 @Controller
@@ -21,13 +22,25 @@ public class SortController {
     @Autowired
     HttpSession httpSession;
 
-    @RequestMapping("/sortTasks/{sort}")
-    public String sortList(@PathVariable String sort){
+    @RequestMapping("/sortTasks/{curSorted}")
+    public String sortList(@PathVariable String curSorted){
         if(httpSession.getAttribute("username")==null){
             return "redirect:/";
         }
+        String lastSorted = (String) httpSession.getAttribute("sortListLast");
+        boolean chetSort = (boolean) httpSession.getAttribute("chetSort");
+        if(curSorted.equals(lastSorted) && !curSorted.equals("default")){
+            chetSort = !chetSort;
+        }
+        else{
+            chetSort = false;
+        }
+        httpSession.removeAttribute("sortListLast");
+        httpSession.setAttribute("sortListLast", curSorted);
         httpSession.removeAttribute("sortList");
-        httpSession.setAttribute("sortList", sort);
+        httpSession.setAttribute("sortList", curSorted);
+        httpSession.removeAttribute("chetSort");
+        httpSession.setAttribute("chetSort", chetSort);
         return "redirect:/task-tracker/";
     }
 }
