@@ -40,6 +40,11 @@ public class TaskServiceImpl implements TaskService {
         taskDAO.deleteTask(id);
     }
 
+    @Override
+    public int numDoneTask(boolean root) {
+        return taskDAO.numDoneTask(root);
+    }
+
     @Transactional
     @Override
     public void markTask(int id) {

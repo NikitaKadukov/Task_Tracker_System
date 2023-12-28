@@ -56,6 +56,7 @@ public class MenuController {
             session.setAttribute("username", user);
             session.setAttribute("sortList", "default");
             session.setAttribute("sortListLast", "default");
+            session.setAttribute("darkDesign", false);
             session.setAttribute("chetSort", false);
             return "redirect:/task-tracker/";
         }
@@ -63,5 +64,7 @@ public class MenuController {
             return "redirect:/";
         }
     }
+
+
 
 }

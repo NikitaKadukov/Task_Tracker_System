@@ -1,6 +1,4 @@
 package com.kadukov.spring.project.spring_project.controller;
-import java.time.temporal.ChronoUnit;
-import java.time.LocalDate;
 import com.kadukov.spring.project.spring_project.entity.Task;
 import com.kadukov.spring.project.spring_project.entity.User;
 import com.kadukov.spring.project.spring_project.service.TaskService;
@@ -18,7 +16,7 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/task-tracker")
-public class MyRESTController {
+public class TrackerController {
 
     @Autowired
     TaskService taskService;
@@ -59,6 +57,7 @@ public class MyRESTController {
 
         model.addAttribute("tasks", tasks);
         model.addAttribute("subTasks", subTasks);
+        model.addAttribute("darkDesign", httpSession.getAttribute("darkDesign"));
         return "start";
     }
 

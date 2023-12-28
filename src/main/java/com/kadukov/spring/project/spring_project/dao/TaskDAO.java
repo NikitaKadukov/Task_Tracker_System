@@ -13,4 +13,6 @@ public interface TaskDAO {
     public Task getTask(int id);
 
     public void deleteTask(int id);
+
+    public int numDoneTask(boolean root);
 }

@@ -58,6 +58,16 @@ public class TaskDAOImpl implements TaskDAO{
     }
 
     @Override
+    public int numDoneTask(boolean root) {
+        List<Task> taskList = getTasks(root);
+        int cnt = 0;
+        for(Task task: taskList){
+            if(task.isIs_done()) cnt++;
+        }
+        return cnt;
+    }
+
+    @Override
     public void markTask(int id) {
         Task task = getTask(id);
         task.setIs_done(!task.isIs_done());

@@ -3,6 +3,9 @@
 <head>
     <title>My_Tasks_Service</title>
     <style>
+        .dark-mode {
+            background-color: #333;
+        }
         body {
             font-family: Arial, sans-serif;
             margin: 21px;
@@ -51,10 +54,7 @@
             text-align: left;
         }
 
-        th {
-            background-color: #3498db;
-            color: #fff;
-        }
+
 
         tr:nth-child(even) {
             background-color: #f9f9f9;
@@ -115,6 +115,7 @@
             white-space: nowrap;
         }
 
+
         nav a.head {
             color: #fff;
             text-decoration: none;
@@ -122,18 +123,26 @@
             border: none;
             white-space: nowrap;
         }
-
-        nav a:hover {
+        tr th{
+            text-align: center;
+        }
+        tr th a {
+            color: #fff;
+            text-decoration: none;
+            text-align: center;
+            padding: 3% 7%;
+            transition: color 0.3s ease-in-out;
+            border: none;
+            white-space: nowrap;
+        }
+        tr th a:hover {
             background-color: #d6f5fc;
             color: #2d6675;
         }
 
-        .loh {
-            color: #3f0909;
-            background-color: #342d1e;
-            padding: 8px 12px;
-            border-radius: 4px;
-            box-shadow: 0 0 10px rgba(80, 58, 17, 0.5);
+        nav a:hover {
+            background-color: #d6f5fc;
+            color: #2d6675;
         }
 
         .ending-soon {
@@ -219,6 +228,11 @@
             color: #368f36;
             animation: none;
         }
+        th {
+            background-color: #3498db;
+            color: #fff;
+        }
+
     </style>
 </head>
 <header>
@@ -229,7 +243,7 @@
         <a href="/task-tracker/logout" class = "head">Выйти</a>
     </nav>
 </header>
-<body>
+<body th:class="${darkDesign} ? 'dark-mode' : ''">
 <h1 class="to_do_list">
     <span class="title-left">Список дел</span>
     <span class="title-right" th:text="${username}"></span>
@@ -259,29 +273,29 @@
     <table th:each="task : ${tasks}" th:if="${not task.is_done}">
     <tr
         th:class="${#temporals.format(task.deadline, 'yyyy-MM-dd') lt #temporals.format(#temporals.createNow(), 'yyyy-MM-dd')} ? 'overdue': ''"
-        th:classappend="${#temporals.format(task.deadline.minusDays(3), 'yyyy-MM-dd') lt #temporals.format(#temporals.createNow(), 'yyyy-MM-dd')} ? 'ending-soon': ''">
+        th:classappend="${#temporals.format(task.deadline.minusDays(2), 'yyyy-MM-dd') lt #temporals.format(#temporals.createNow(), 'yyyy-MM-dd')} ? 'ending-soon': ''">
         <td class="tdStat"><a class="oper" th:href="@{markTask/{id}(id=${task.id})}" >Выполнено</a></td>
         <td class="tdAdd"><a class="oper" th:href="@{addRefTask/{id}(id=${task.id})}" >Подзадание</a></td>
         <td th:text="${task.title}" class="tdTit"></td>
         <td th:text="${task.description}" class="tdDesc"></td>
-        <td th:text="${task.deadline}" class="tdDead"></td>
-        <td th:text="${task.priority}" class="tdPrior"></td>
+        <td th:text="${task.deadline}" class="tdDead" style="text-align: center"></td>
+        <td th:text="${task.priority}" class="tdPrior" style="text-align: center; font-size: 20pt;"></td>
         <td class="tdOper">
             <a th:href="@{updateTask/{id}(id=${task.id})}" class = "oper">Изменить</a>
             <a href="#" class="oper" th:onclick="'confirmDelete(' + ${task.id} + ')'" >Удалить</a>
         </td>
 </tr>
         <tr th:each="subTask : ${subTasks}" th:if="${subTask.ref_task == task.id}"
-            th:class="${#temporals.format(subTask.deadline.minusDays(3), 'yyyy-MM-dd') lt #temporals.format(#temporals.createNow(), 'yyyy-MM-dd')} ? 'ending-soon-subtask': ''"
+            th:class="${#temporals.format(subTask.deadline.minusDays(2), 'yyyy-MM-dd') lt #temporals.format(#temporals.createNow(), 'yyyy-MM-dd')} ? 'ending-soon-subtask': ''"
             th:classappend="${subTask.is_done} ? 'completed-subtask': ''">
             <td></td>
                 <td style="text-align: right"><a class="oper" th:href="@{markTask/{id}(id=${subTask.id})}" >OK</a></td>
                 <td th:text="${subTask.title}"></td>
                 <td th:text="${subTask.description}"></td>
-                <td colspan="2" th:text="${subTask.deadline}"></td>
-                <td >
-                    <a th:href="@{updateTask/{id}(id=${subTask.id})}" class = "oper">Изменить</a>
-                    <a href="#" class="oper" th:onclick="'confirmDelete(' + ${subTask.id} + ')'" >Удалить</a>
+                <td colspan="2" th:text="${subTask.deadline}" style="text-align: center"></td>
+                <td>
+                    <a th:href="@{updateTask/{id}(id=${subTask.id})}" class = "oper" >Изменить</a>
+                    <a href="#" class="oper" th:onclick="'confirmDelete(' + ${subTask.id} + ')'">Удалить</a>
                 </td>
             </tr>
 
@@ -312,8 +326,8 @@
         <td class="tdStat"><a class="oper" th:href="@{markTask/{id}(id=${task.id})}" >Вернуть</a></td>
         <td th:text="${task.title}" class="tdTit"></td>
         <td th:text="${task.description}" class="tdDesc"></td>
-        <td th:text="${task.deadline}" class="tdDead"></td>
-        <td th:text="${task.priority}" class="tdPrior"></td>
+        <td th:text="${task.deadline}" class="tdDead" style="text-align: center"></td>
+        <td th:text="${task.priority}" class="tdPrior" style="text-align: center; font-size: 20pt;"></td>
         <td class = "tdOper">
             <a href="#" class="oper" th:onclick="'confirmDelete(' + ${task.id} + ')'" >Удалить</a>
         </td>
@@ -323,7 +337,7 @@
             <td></td>
             <td th:text="${subTask.title}"></td>
             <td th:text="${subTask.description}"></td>
-            <td th:text="${subTask.deadline}" colspan="2"></td>
+            <td th:text="${subTask.deadline}" colspan="2" style="text-align: center"></td>
             <td>
                 <a href="#" class="oper" th:onclick="'confirmDelete(' + ${subTask.id} + ')'" >Удалить</a>
             </td>

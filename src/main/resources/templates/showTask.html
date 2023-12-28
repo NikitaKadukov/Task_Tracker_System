@@ -39,6 +39,20 @@
             border: 1px solid #3498db;
             text-align: center;
         }
+        a.head{
+            color: #3498db;
+            text-decoration: none;
+            margin-right: 10px;
+            transition: color 0.3s ease-in-out;
+            cursor: pointer;
+            display: inline-block;
+            padding: 8px 4px;
+            padding-left: 6%;
+            padding-right: 6%;
+            border-radius: 4px;
+            border: 1px solid #3498db;
+            text-align: center;
+        }
 
         input[type="text"],
         input[type="date"],
@@ -84,7 +98,7 @@
             white-space: nowrap;
         }
 
-        nav a {
+        nav a.head {
             color: #fff;
             text-decoration: none;
             transition: color 0.3s ease-in-out;
@@ -116,10 +130,10 @@
 </head>
 <header>
     <nav>
-        <a href="/task-tracker/">На главную</a>
-        <a href="/profile">Профиль</a>
-        <a href="/about">О сайте</a>
-        <a href="/task-tracker/logout">Выйти</a>
+        <a href="/task-tracker/" class = "head">На главную</a>
+        <a href="/profile" class = "head">Профиль</a>
+        <a href="/about" class = "head">О сайте</a>
+        <a href="/task-tracker/logout" class = "head">Выйти</a>
     </nav>
 </header>
 <body>
