@@ -77,7 +77,6 @@ public class TrackerController {
         if(httpSession.getAttribute("username")==null){
             return "redirect:/";
         }
-        System.out.println(task.getDeadline());
         if(bindingResult.hasErrors()){
             return "showTask";
         }

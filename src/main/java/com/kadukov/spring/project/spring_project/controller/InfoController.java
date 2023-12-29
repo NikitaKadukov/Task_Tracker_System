@@ -31,6 +31,7 @@ public class InfoController {
         model.addAttribute("numDoneTask", taskService.numDoneTask(true));
         model.addAttribute("numSubTask", taskService.getTasks(false).size());
         model.addAttribute("numDoneSubTask", taskService.numDoneTask(false));
+        model.addAttribute("user", (User)httpSession.getAttribute("username"));
         return "profile";
     }
 
@@ -43,6 +44,19 @@ public class InfoController {
         return "redirect:/profile";
     }
 
+    @RequestMapping("/adminPage")
+    public String adminPage(Model model){
+        User user = (User)httpSession.getAttribute("username");
+        if(user==null){
+            return "redirect:/";
+        }
+        if(!user.getRole().equals("admin") && !user.getRole().equals("subAdmin")){
+            return "redirect:/";
+        }
+        model.addAttribute("users", userService.getAllUsers(((User)httpSession.getAttribute("username")).getRole()));
+        model.addAttribute("curUser", (User)httpSession.getAttribute("username"));
+        return "admin_page";
+    }
 
 
 }

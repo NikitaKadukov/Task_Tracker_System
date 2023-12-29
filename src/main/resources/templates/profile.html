@@ -158,7 +158,7 @@
         <div class="profile-buttons"><a href="#" class="profile-button edit-password">Изменить пароль</a></div>
         <div class="profile-buttons"><a href="#" class="profile-button edit-email">Изменить почту</a></div>
         <div class="profile-buttons"><a href="/darkMode" class="profile-button toggle-dark-mode">Переключиться на темную тему</a></div>
-
+        <div th:if ="${user.getRole()=='admin' ||user.getRole()=='subAdmin'}" class="profile-buttons"><a href="/adminPage" class="profile-button edit-email">Данные администратора</a></div>
     </div>
 </div>
 

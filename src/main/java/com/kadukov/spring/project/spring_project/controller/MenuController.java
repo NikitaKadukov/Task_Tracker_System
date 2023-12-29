@@ -5,9 +5,11 @@ import com.kadukov.spring.project.spring_project.entity.User;
 import com.kadukov.spring.project.spring_project.service.TaskService;
 import com.kadukov.spring.project.spring_project.service.UserService;
 import jakarta.servlet.http.HttpSession;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -33,9 +35,16 @@ public class MenuController {
     }
 
     @RequestMapping("/saveUser")
-    public String saveUser(@ModelAttribute("task") User user){
-        userService.saveUser(user);
-        return "redirect:/";
+    public String saveUser(@Valid @ModelAttribute("user") User user, BindingResult bindingResult){
+        if(bindingResult.hasErrors()){
+            return "registry";
+        }
+        else {
+            user.setEnabled(true);
+            user.setRole("user");
+            userService.saveUser(user);
+            return "redirect:/";
+        }
     }
 
     @RequestMapping("/forgotPassword")
@@ -53,7 +62,8 @@ public class MenuController {
     @RequestMapping("/login")
     public String login(@ModelAttribute("task") User user, Model model, HttpSession session){
         if(userService.valid(user)){
-            session.setAttribute("username", user);
+            User user2 = userService.getUser(user.getUsername());
+            session.setAttribute("username", user2);
             session.setAttribute("sortList", "default");
             session.setAttribute("sortListLast", "default");
             session.setAttribute("darkDesign", false);

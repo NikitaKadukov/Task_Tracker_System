@@ -1,8 +1,7 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <style>
         body {
             font-family: 'Arial', sans-serif;
@@ -53,6 +52,21 @@
             border: 2px solid #3498db;
             transition: background-color 0.3s ease;
         }
+        .error-message {
+            color: red;
+            font-size: 14px;
+            margin-top: 5px;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
     </style>
     <title>Registration Page</title>
 </head>
@@ -61,18 +75,18 @@
 <div class="container">
     <h2>Registration</h2>
 
-    <form action="/saveUser" method="post" style="padding: 20px">
-        <div class="form-group">
-            <label class="form-label" for="username">Username:</label>
-            <input class="form-input" type="text" id="username" name="username" required/>
-        </div>
+    <form action="/saveUser" method="post" style="padding: 20px" th:object="${user}">
+        Username: <input class="form-input" type="text" th:field="*{username}" /><br>
+        <span th:if="${#fields.hasErrors('username')}" th:errors="*{username}" class="error-message"></span><br><br>
 
-        <div class="form-group">
-            <label class="form-label" for="password">Password:</label>
-            <input class="form-input" type="password" id="password" name="password" required/>
-        </div><br>
+        Password: <input class="form-input" type="password" th:field="*{password}" /><br>
+        <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="error-message"></span>
+        <br><br>
 
-        <input type="submit" class="button" value="Зарегистрироваться"/>
+        Email: <input class="form-input" type="email" th:field="*{email}" />
+        <br><br>
+
+        <input type="submit" class="button" value="Зарегистрироваться" />
     </form>
 </div>
 
