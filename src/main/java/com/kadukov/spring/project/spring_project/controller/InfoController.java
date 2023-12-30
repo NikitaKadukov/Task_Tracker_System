@@ -32,6 +32,7 @@ public class InfoController {
         model.addAttribute("numSubTask", taskService.getTasks(false).size());
         model.addAttribute("numDoneSubTask", taskService.numDoneTask(false));
         model.addAttribute("user", (User)httpSession.getAttribute("username"));
+        model.addAttribute("darkDesign", httpSession.getAttribute("darkDesign"));
         return "profile";
     }
 
@@ -55,6 +56,7 @@ public class InfoController {
         }
         model.addAttribute("users", userService.getAllUsers(((User)httpSession.getAttribute("username")).getRole()));
         model.addAttribute("curUser", (User)httpSession.getAttribute("username"));
+        model.addAttribute("darkDesign", httpSession.getAttribute("darkDesign"));
         return "admin_page";
     }
 

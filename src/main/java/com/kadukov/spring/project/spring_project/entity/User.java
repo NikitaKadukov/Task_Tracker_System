@@ -11,11 +11,12 @@ public class User {
     @Pattern(regexp = "\\w{3,}", message = "Минимум 3 символа (буквы, цифры)")
     private String username;
     @Column
-    @Pattern(regexp = ".{6,}", message = "Минимум 6 символов")
+    @Pattern(regexp = ".{6,}", message = "Минимум 6 символов (буквы, цифры)")
     private String password;
     @Column
     private boolean enabled;
     @Column
+    @Pattern(regexp = "\\w+@\\w+\\.\\w+", message = "Введите корректную почту")
     private String email;
     @Column
     private String role;

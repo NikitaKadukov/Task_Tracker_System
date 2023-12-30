@@ -4,6 +4,9 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <style>
+        .dark-mode {
+            background-color: #222;
+        }
         body {
             font-family: Arial, sans-serif;
             margin: 21px;
@@ -18,6 +21,10 @@
             padding: 20px;
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        form.dark {
+            background-color: #6b8b93;
         }
 
         label {
@@ -39,6 +46,10 @@
             border: 1px solid #3498db;
             text-align: center;
         }
+        a.darkhead:hover, a.darkoper:hover {
+            color: #1f618d;
+            background-color: #97b5bd;
+        }
         a.head{
             color: #3498db;
             text-decoration: none;
@@ -51,6 +62,20 @@
             padding-right: 6%;
             border-radius: 4px;
             border: 1px solid #3498db;
+            text-align: center;
+        }
+        a.darkhead{
+            color: #aec6cc;
+            text-decoration: none;
+            margin-right: 10px;
+            transition: color 0.3s ease-in-out;
+            cursor: pointer;
+            display: inline-block;
+            padding: 8px 4px;
+            padding-left: 6%;
+            padding-right: 6%;
+            border-radius: 4px;
+            border: 1px solid #12496e;
             text-align: center;
         }
 
@@ -90,7 +115,16 @@
             color: #fff;
             white-space: nowrap;
         }
-
+        header.darkhead {
+            background-color: #1f618d;
+            margin-left: -21px;
+            margin-right: -21px;
+            margin-top: -21px;
+            padding: 7px;
+            text-align: center;
+            color: #aec6cc;
+            white-space: nowrap;
+        }
         nav {
             display: flex;
             justify-content: space-around;
@@ -100,6 +134,13 @@
 
         nav a.head {
             color: #fff;
+            text-decoration: none;
+            transition: color 0.3s ease-in-out;
+            border: none;
+            white-space: nowrap;
+        }
+        nav a.darkhead {
+            color: #aec6cc;
             text-decoration: none;
             transition: color 0.3s ease-in-out;
             border: none;
@@ -128,17 +169,17 @@
     </style>
 
 </head>
-<header>
-    <nav>
-        <a href="/task-tracker/" class = "head">На главную</a>
-        <a href="/profile" class = "head">Профиль</a>
-        <a href="/about" class = "head">О сайте</a>
-        <a href="/task-tracker/logout" class = "head">Выйти</a>
+<header th:class="${darkDesign} ? 'darkhead' : 'head'">
+    <nav th:class="${darkDesign} ? 'darkhead' : 'head'">
+        <a href="/task-tracker/" th:class="${darkDesign} ? 'darkhead' : 'head'">На главную</a>
+        <a href="/profile" th:class="${darkDesign} ? 'darkhead' : 'head'">Профиль</a>
+        <a href="/about" th:class="${darkDesign} ? 'darkhead' : 'head'">О сайте</a>
+        <a href="/task-tracker/logout" th:class="${darkDesign} ? 'darkhead' : 'head'">Выйти</a>
     </nav>
 </header>
-<body>
+<body th:class="${darkDesign} ? 'dark-mode' : ''">
 
-<form action="/task-tracker/saveTask" method="post" th:object="${task}">
+<form action="/task-tracker/saveTask" method="post" th:object="${task}" th:class="${darkDesign} ? 'dark' : ''">
     <input type="hidden" th:field="*{id}"/>
     TITLE <input type="text" th:field="*{title}"/><span th:if="${#fields.hasErrors('title')}" th:errors="*{title}" class="error-message"></span><br><br>
     DESCRIPTION <input type="text" th:field="*{description}"/><br><br>
@@ -148,7 +189,7 @@
 
     <input type="hidden" th:field="*{category}"/>
     <input type="hidden" th:field="*{ref_task}"/>
-    <input type="submit" value="OK"/>
+    <input type="submit" value="СОХРАНИТЬ"/>
 </form>
 
 </body>

@@ -3,6 +3,9 @@
 <head>
     <title>Профиль</title>
     <style>
+        .dark-mode {
+            background-color: #222;
+        }
         body {
             font-family: Arial, sans-serif;
             margin: 21px;
@@ -16,6 +19,7 @@
             color: #333;
             text-align: center;
         }
+
 
         .profile-container {
             max-width: 600px;
@@ -63,6 +67,10 @@
             background-color: #3498db;
         }
 
+        .dark_mode {
+            background-color: #342d1e;
+        }
+
         .toggle-dark-mode {
             background-color: #2c3e50;
         }
@@ -84,10 +92,28 @@
             border: 1px solid #3498db;
             text-align: center;
         }
+        a.darkhead, a.darkoper{
+            color: #aec6cc;
+            text-decoration: none;
+            margin-right: 10px;
+            transition: color 0.3s ease-in-out;
+            cursor: pointer;
+            display: inline-block;
+            padding: 8px 4px;
+            padding-left: 6%;
+            padding-right: 6%;
+            border-radius: 4px;
+            border: 1px solid #12496e;
+            text-align: center;
+        }
 
         a:hover {
             color: #1f618d;
             background-color: #ecf0f1;
+        }
+        a.darkhead:hover, a.darkoper:hover {
+            color: #1f618d;
+            background-color: #97b5bd;
         }
 
 
@@ -99,6 +125,16 @@
             padding: 7px;
             text-align: center;
             color: #fff;
+            white-space: nowrap;
+        }
+        header.darkhead {
+            background-color: #1f618d;
+            margin-left: -21px;
+            margin-right: -21px;
+            margin-top: -21px;
+            padding: 7px;
+            text-align: center;
+            color: #aec6cc;
             white-space: nowrap;
         }
 
@@ -116,27 +152,51 @@
             border: none;
             white-space: nowrap;
         }
-
+        nav a.darkhead {
+            color: #aec6cc;
+            text-decoration: none;
+            transition: color 0.3s ease-in-out;
+            border: none;
+            white-space: nowrap;
+        }
         nav a:hover {
             background-color: #d6f5fc;
             color: #2d6675;
         }
+        body.dark-mode div div{
+            color: #aec6cc;
+        }
+        body.dark-mode div div h1{
+            color: #aec6cc;
+        }
     </style>
 </head>
-<header>
-    <nav>
-        <a href="/task-tracker/" class = "head">На главную</a>
-        <a href="/profile" class = "head">Профиль</a>
-        <a href="/about" class = "head">О сайте</a>
-        <a href="/task-tracker/logout" class = "head">Выйти</a>
+<header th:class="${darkDesign} ? 'darkhead' : 'head'">
+    <nav th:class="${darkDesign} ? 'darkhead' : 'head'">
+        <a href="/task-tracker/" th:class="${darkDesign} ? 'darkhead' : 'head'">На главную</a>
+        <a href="/profile" th:class="${darkDesign} ? 'darkhead' : 'head'">Профиль</a>
+        <a href="/about" th:class="${darkDesign} ? 'darkhead' : 'head'">О сайте</a>
+        <a href="/task-tracker/logout" th:class="${darkDesign} ? 'darkhead' : 'head'">Выйти</a>
     </nav>
 </header>
-<body>
+<body th:class="${darkDesign} ? 'dark-mode' : ''">
 <div class="profile-container">
     <div class="profile-container">
         <h1>Профиль</h1>
 
         <div class="profile-info">
+            <div class="info-item">
+                <span class="info-label">Имя пользователя: </span>
+                <span class="info-value" th:text=" ${user.username}"></span>
+            </div>
+            <div class="info-item">
+                <span class="info-label">Роль: </span>
+                <span class="info-value" th:text=" ${user.role}"></span>
+            </div>
+            <div class="info-item">
+                <span class="info-label">Электронная почта: </span>
+                <span class="info-value" th:text=" ${user.email}"></span>
+            </div><hr>
             <div class="info-item">
                 <span class="info-label">Количество заданий:</span>
                 <span class="info-value" th:text="${numTask}"></span>
@@ -153,12 +213,12 @@
                 <span class="info-label">Выполненных подзадач:</span>
                 <span class="info-value" th:text="${numDoneSubTask}"></span>
             </div>
-        </div>
+        </div><hr>
 
         <div class="profile-buttons"><a href="#" class="profile-button edit-password">Изменить пароль</a></div>
         <div class="profile-buttons"><a href="#" class="profile-button edit-email">Изменить почту</a></div>
         <div class="profile-buttons"><a href="/darkMode" class="profile-button toggle-dark-mode">Переключиться на темную тему</a></div>
-        <div th:if ="${user.getRole()=='admin' ||user.getRole()=='subAdmin'}" class="profile-buttons"><a href="/adminPage" class="profile-button edit-email">Данные администратора</a></div>
+        <div th:if ="${user.getRole()=='admin' ||user.getRole()=='subAdmin'}" class="profile-buttons"><a href="/adminPage" class="profile-button dark_mode">Данные администратора</a></div>
     </div>
 </div>
 

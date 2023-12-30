@@ -69,6 +69,7 @@ public class TrackerController {
         Task task = new Task();
         task.setId(0); task.setIs_done(false); task.setCategory("default"); task.setRef_task(0);
         model.addAttribute("task", task);
+        model.addAttribute("darkDesign", httpSession.getAttribute("darkDesign"));
         return "showTask";
     }
 
@@ -95,6 +96,7 @@ public class TrackerController {
         }
         Task task = taskService.getTask(id);
         model.addAttribute("task", task);
+        model.addAttribute("darkDesign", httpSession.getAttribute("darkDesign"));
         return "showTask";
     }
 
@@ -133,6 +135,7 @@ public class TrackerController {
         Task task = new Task();
         task.setId(0); task.setIs_done(false); task.setCategory("none"); task.setRef_task(id);task.setPriority(0);
         model.addAttribute("task", task);
+        model.addAttribute("darkDesign", httpSession.getAttribute("darkDesign"));
         return "showTask";
     }
 }
