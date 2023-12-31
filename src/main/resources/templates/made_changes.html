@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+
+
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <style>
+        .dark-mode {
+            background-color: #222;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            margin: 21px;
+            background-color: #f4f4f4;
+        }
+
+        form {
+            max-width: 400px;
+            margin: 0 auto;
+            margin-top: 40px;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        form.dark {
+            background-color: #6b8b93;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+        a {
+            color: #3498db;
+            text-decoration: none;
+            margin-right: 10px;
+            transition: color 0.3s ease-in-out;
+            cursor: pointer;
+            display: inline-block;
+            padding: 8px 12px;
+            padding-left: 12%;
+            padding-right: 12%;
+            border-radius: 4px;
+            border: 1px solid #3498db;
+            text-align: center;
+        }
+        a.darkhead:hover, a.darkoper:hover {
+            color: #1f618d;
+            background-color: #97b5bd;
+        }
+        a.head, a.oper{
+            color: #3498db;
+            text-decoration: none;
+            margin-right: 10px;
+            transition: color 0.3s ease-in-out;
+            cursor: pointer;
+            display: inline-block;
+            padding: 8px 4px;
+            padding-left: 6%;
+            padding-right: 6%;
+            border-radius: 4px;
+            border: 1px solid #3498db;
+            text-align: center;
+        }
+        a.darkhead, a.darkoper{
+            color: #aec6cc;
+            text-decoration: none;
+            margin-right: 10px;
+            transition: color 0.3s ease-in-out;
+            cursor: pointer;
+            display: inline-block;
+            padding: 8px 4px;
+            padding-left: 6%;
+            padding-right: 6%;
+            border-radius: 4px;
+            border: 1px solid #12496e;
+            text-align: center;
+        }
+
+        input[type="text"],
+        input[type="date"],
+        input[type="number"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 16px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+
+        input[type="submit"] {
+            background-color: #4caf50;
+            color: white;
+            padding: 12px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease-in-out;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+        header {
+            background-color: #3498db;
+            margin-left: -21px;
+            margin-right: -21px;
+            margin-top: -21px;
+            padding: 7px;
+            text-align: center;
+            color: #fff;
+            white-space: nowrap;
+        }
+        header.darkhead {
+            background-color: #1f618d;
+            margin-left: -21px;
+            margin-right: -21px;
+            margin-top: -21px;
+            padding: 7px;
+            text-align: center;
+            color: #aec6cc;
+            white-space: nowrap;
+        }
+        nav {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            white-space: nowrap;
+        }
+
+        nav a.head {
+            color: #fff;
+            text-decoration: none;
+            transition: color 0.3s ease-in-out;
+            border: none;
+            white-space: nowrap;
+        }
+        nav a.darkhead {
+            color: #aec6cc;
+            text-decoration: none;
+            transition: color 0.3s ease-in-out;
+            border: none;
+            white-space: nowrap;
+        }
+
+        nav a:hover {
+            background-color: #d6f5fc;
+            color: #2d6675;
+        }
+        .error-message {
+            color: red;
+            font-size: 14px;
+            margin-top: 5px;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+    </style>
+
+</head>
+<header th:class="${darkDesign} ? 'darkhead' : 'head'">
+    <nav th:class="${darkDesign} ? 'darkhead' : 'head'">
+        <a href="/task-tracker/" th:class="${darkDesign} ? 'darkhead' : 'head'">На главную</a>
+        <a href="/profile" th:class="${darkDesign} ? 'darkhead' : 'head'">Профиль</a>
+        <a href="/about" th:class="${darkDesign} ? 'darkhead' : 'head'">О сайте</a>
+        <a href="/task-tracker/logout" th:class="${darkDesign} ? 'darkhead' : 'head'">Выйти</a>
+    </nav>
+</header>
+<body th:class="${darkDesign} ? 'dark-mode' : ''">
+
+<form action="/checkPassword" method="post" th:object="${curUser}" th:class="${darkDesign} ? 'dark' : ''">
+
+    <span>Изменения внесены</span><br><br>
+    <a class="oper" href="/profile" >КРУТО</a>
+</form>
+
+</body>
+</html>

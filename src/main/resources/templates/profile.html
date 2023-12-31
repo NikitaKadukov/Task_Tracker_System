@@ -183,7 +183,6 @@
 <div class="profile-container">
     <div class="profile-container">
         <h1>Профиль</h1>
-
         <div class="profile-info">
             <div class="info-item">
                 <span class="info-label">Имя пользователя: </span>
@@ -215,8 +214,8 @@
             </div>
         </div><hr>
 
-        <div class="profile-buttons"><a href="#" class="profile-button edit-password">Изменить пароль</a></div>
-        <div class="profile-buttons"><a href="#" class="profile-button edit-email">Изменить почту</a></div>
+        <div class="profile-buttons"><a href="/editPassword" class="profile-button edit-password">Изменить пароль</a></div>
+        <div class="profile-buttons"><a href="/editEmail" class="profile-button edit-email">Изменить почту</a></div>
         <div class="profile-buttons"><a href="/darkMode" class="profile-button toggle-dark-mode">Переключиться на темную тему</a></div>
         <div th:if ="${user.getRole()=='admin' ||user.getRole()=='subAdmin'}" class="profile-buttons"><a href="/adminPage" class="profile-button dark_mode">Данные администратора</a></div>
     </div>
