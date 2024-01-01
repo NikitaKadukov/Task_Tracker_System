@@ -2,11 +2,13 @@ package com.kadukov.spring.project.spring_project.controller;
 
 import com.kadukov.spring.project.spring_project.entity.Task;
 import com.kadukov.spring.project.spring_project.entity.User;
+import com.kadukov.spring.project.spring_project.service.MailSender;
 import com.kadukov.spring.project.spring_project.service.TaskService;
 import com.kadukov.spring.project.spring_project.service.UserService;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -21,6 +23,8 @@ public class MenuController {
     @Autowired
     UserService userService;
 
+    @Autowired
+    private MailSender mailSender;
     @RequestMapping("/")
     public String menu_page(){
 
@@ -49,6 +53,7 @@ public class MenuController {
 
     @RequestMapping("/forgotPassword")
     public String forgotPassword(){
+        mailSender.send("lohovloh104@gmail.com", "Hi", "Darova");
         return "forgotPasswordView";
     }
 
@@ -75,6 +80,12 @@ public class MenuController {
         }
     }
 
-
+    @RequestMapping("/about")
+    public String about(HttpSession httpSession){
+        if(httpSession.getAttribute("username")==null){
+            return "redirect:/";
+        }
+        return "about_page";
+    }
 
 }
