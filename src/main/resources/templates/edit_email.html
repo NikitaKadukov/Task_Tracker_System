@@ -183,7 +183,7 @@
 
     PASSWORD <input type="text" th:field="*{password}"/><span th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="error-message"></span><br><br>
     NEW EMAIL <input type="text" id="newEmail" name="newEmail"><br><br>
-    <span th:if="${errorEmail}" class="error-message">Ошибка: неправильный пароль или неправильно введена новая почта</span><br><br>
+    <span th:if="${errorEmail}" class="error-message">Ошибка: неправильный пароль или неправильно введена новая почта</span><br>
     <input type="submit" value="СОХРАНИТЬ"/>
 </form>
 

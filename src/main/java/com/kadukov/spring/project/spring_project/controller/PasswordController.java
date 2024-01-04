@@ -29,6 +29,7 @@ public class PasswordController {
     @RequestMapping("/editPassword")
     public String editPassword(Model model){
         User user = (User)httpSession.getAttribute("username");
+        model.addAttribute("darkDesign", httpSession.getAttribute("darkDesign"));
         if(user==null){
             return "redirect:/";
         }
@@ -61,8 +62,9 @@ public class PasswordController {
     }
 
     @RequestMapping("/madeChanges")
-    public String madeChanges(){
+    public String madeChanges(Model model){
         User user = (User)httpSession.getAttribute("username");
+        model.addAttribute("darkDesign", httpSession.getAttribute("darkDesign"));
         if(user==null){
             return "redirect:/";
         }

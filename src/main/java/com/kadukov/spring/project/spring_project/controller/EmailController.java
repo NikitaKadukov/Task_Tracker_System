@@ -38,6 +38,7 @@ public class EmailController {
         }
         User curUser = new User();
         model.addAttribute("curUser", curUser);
+        model.addAttribute("darkDesign", httpSession.getAttribute("darkDesign"));
         return "edit_email";
     }
     @RequestMapping(value = "/checkEmail", method = RequestMethod.POST)

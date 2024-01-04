@@ -53,6 +53,7 @@ public class InfoController {
     @RequestMapping("/adminPage")
     public String adminPage(Model model){
         User user = (User)httpSession.getAttribute("username");
+        model.addAttribute("darkDesign", httpSession.getAttribute("darkDesign"));
         if(user==null){
             return "redirect:/";
         }

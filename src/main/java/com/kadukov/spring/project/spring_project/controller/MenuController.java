@@ -53,7 +53,7 @@ public class MenuController {
 
     @RequestMapping("/forgotPassword")
     public String forgotPassword(){
-        mailSender.send("lohovloh104@gmail.com", "Hi", "Darova");
+        mailSender.send("nikitaets2016@gmail.com", "Hi", "Darova");
         return "forgotPasswordView";
     }
 
@@ -81,7 +81,8 @@ public class MenuController {
     }
 
     @RequestMapping("/about")
-    public String about(HttpSession httpSession){
+    public String about(HttpSession httpSession, Model model){
+        model.addAttribute("darkDesign", httpSession.getAttribute("darkDesign"));
         if(httpSession.getAttribute("username")==null){
             return "redirect:/";
         }
