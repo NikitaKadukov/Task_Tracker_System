@@ -6,6 +6,8 @@ import java.util.List;
 
 public interface TaskDAO {
     public List<Task> getTasks(boolean root);
+
+    public List<Task> getTasks(boolean root, String username);
     public void saveTask(Task task);
 
     public void markTask(int id);
@@ -14,5 +16,8 @@ public interface TaskDAO {
 
     public void deleteTask(int id);
 
+    public void deleteTask(int id, String username);
+
     public int numDoneTask(boolean root);
+
 }

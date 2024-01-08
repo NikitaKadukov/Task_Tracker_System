@@ -23,6 +23,12 @@ public class TaskServiceImpl implements TaskService {
 
     @Transactional
     @Override
+    public List<Task> getTasks(boolean root, String username) {
+        return taskDAO.getTasks(root, username);
+    }
+
+    @Transactional
+    @Override
     public void saveTask(Task task) {
         taskDAO.saveTask(task);
     }
@@ -38,6 +44,12 @@ public class TaskServiceImpl implements TaskService {
     @Override
     public void deleteTask(int id) {
         taskDAO.deleteTask(id);
+    }
+
+    @Transactional
+    @Override
+    public void deleteTask(int id, String username) {
+        taskDAO.deleteTask(id, username);
     }
 
     @Transactional
