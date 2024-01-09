@@ -1,6 +1,7 @@
 package com.kadukov.spring.project.spring_project.controller;
 
 import com.kadukov.spring.project.spring_project.entity.User;
+import com.kadukov.spring.project.spring_project.service.MailSender;
 import com.kadukov.spring.project.spring_project.service.TaskService;
 import com.kadukov.spring.project.spring_project.service.UserService;
 import jakarta.servlet.http.HttpSession;

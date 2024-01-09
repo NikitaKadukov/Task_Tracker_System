@@ -12,9 +12,7 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -53,7 +51,6 @@ public class MenuController {
 
     @RequestMapping("/forgotPassword")
     public String forgotPassword(){
-        mailSender.send("nikitaets2016@gmail.com", "Hi", "Darova");
         return "forgotPasswordView";
     }
 
@@ -89,4 +86,27 @@ public class MenuController {
         return "about_page";
     }
 
+
+    @RequestMapping(value = "/sendEmail", method = RequestMethod.POST)
+    public String sendEmail(@RequestParam String email, Model model){
+        User user = userService.whichEmail(email);
+        if(user == null){
+            model.addAttribute("info", "Такая почта не зарегистрирована" +
+                    " на сайте!");
+        }
+        else{
+            try{
+                String message = "Ваши данные:\n" +
+                        "\tЛогин: " + user.getUsername() +
+                        "\n\tПароль: " + user.getPassword();
+                mailSender.send(user.getEmail(), "Восстановление данных", message);
+                model.addAttribute("info", "Письмо отправлено успешно!");
+            }
+            catch (Exception e){
+                model.addAttribute("info", "Такая почта не" +
+                        "существует или возникла ошибка при отправке на неё!");
+            }
+        }
+        return "info_page";
+    }
 }

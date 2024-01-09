@@ -55,4 +55,22 @@ public class UserDAOImpl implements UserDAO{
         return userList;
     }
 
+
+    @Override
+    public User whichEmail(String email){
+        for(User user: getUsers()){
+            if(user.getEmail().equals(email)){
+                return user;
+            }
+        }
+        return null;
+    }
+
+    private List<User> getUsers() {
+        Query query;
+        query = entityManager.createQuery("from User");
+        List<User> userList = query.getResultList();
+        return userList;
+    }
+
 }

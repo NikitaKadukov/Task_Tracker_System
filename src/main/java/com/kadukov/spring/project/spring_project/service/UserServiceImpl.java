@@ -60,4 +60,10 @@ public class UserServiceImpl implements UserService{
         user.setEnabled(!user.isEnabled());
         userDAO.saveUser(user);
     }
+
+    @Transactional
+    @Override
+    public User whichEmail(String email){
+        return userDAO.whichEmail(email);
+    }
 }

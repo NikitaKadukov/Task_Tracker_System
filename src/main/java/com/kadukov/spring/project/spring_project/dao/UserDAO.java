@@ -11,4 +11,6 @@ public interface UserDAO {
     public boolean valid(User user);
 
     public List<User> getAllUsers(String role);
+
+    public User whichEmail(String email);
 }

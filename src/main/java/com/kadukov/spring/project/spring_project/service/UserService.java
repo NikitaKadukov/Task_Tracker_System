@@ -17,4 +17,6 @@ public interface UserService {
     public boolean valid(User user);
 
     public void blockUser(String name);
+
+    public User whichEmail(String email);
 }
