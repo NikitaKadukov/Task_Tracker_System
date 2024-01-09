@@ -24,9 +24,6 @@ public class SortController {
 
     @RequestMapping("/sortTasks/{curSorted}")
     public String sortList(@PathVariable String curSorted){
-        if(httpSession.getAttribute("username")==null){
-            return "redirect:/";
-        }
         String lastSorted = (String) httpSession.getAttribute("sortListLast");
         boolean chetSort = (boolean) httpSession.getAttribute("chetSort");
         if(curSorted.equals(lastSorted) && !curSorted.equals("default")){

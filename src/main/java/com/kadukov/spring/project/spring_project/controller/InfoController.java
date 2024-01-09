@@ -29,9 +29,6 @@ public class InfoController {
 
     @RequestMapping("/profile")
     public String profile_page(Model model){
-        if(httpSession.getAttribute("username")==null){
-            return "redirect:/";
-        }
         model.addAttribute("numTask", taskService.getTasks(true).size());
         model.addAttribute("numDoneTask", taskService.numDoneTask(true));
         model.addAttribute("numSubTask", taskService.getTasks(false).size());
@@ -43,9 +40,6 @@ public class InfoController {
 
     @RequestMapping("/darkMode")
     public String darkMode(Model model){
-        if(httpSession.getAttribute("username")==null){
-            return "redirect:/";
-        }
         httpSession.setAttribute("darkDesign", !(boolean)(httpSession.getAttribute("darkDesign")));
         return "redirect:/profile";
     }
@@ -54,9 +48,6 @@ public class InfoController {
     public String adminPage(Model model){
         User user = (User)httpSession.getAttribute("username");
         model.addAttribute("darkDesign", httpSession.getAttribute("darkDesign"));
-        if(user==null){
-            return "redirect:/";
-        }
         if(!user.getRole().equals("admin") && !user.getRole().equals("subAdmin")){
             return "redirect:/";
         }

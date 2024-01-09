@@ -26,9 +26,6 @@ public class UserChangeController {
     @RequestMapping("/changeRole/{name}")
     public String changeRole(@PathVariable String name){
         User user = (User)httpSession.getAttribute("username");
-        if(user==null){
-            return "redirect:/";
-        }
         if(!user.getRole().equals("admin")){
             return "redirect:/";
         }
@@ -39,9 +36,6 @@ public class UserChangeController {
     @RequestMapping("/blockUser/{name}")
     public String blockUser(@PathVariable String name){
         User user = (User)httpSession.getAttribute("username");
-        if(user==null){
-            return "redirect:/";
-        }
         if(!user.getRole().equals("admin") && !user.getRole().equals("subAdmin")){
             return "redirect:/";
         }

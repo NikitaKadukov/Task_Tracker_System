@@ -32,10 +32,6 @@ public class EmailController {
 
     @RequestMapping("/editEmail")
     public String editEmail(Model model){
-        User user = (User)httpSession.getAttribute("username");
-        if(user==null){
-            return "redirect:/";
-        }
         User curUser = new User();
         model.addAttribute("curUser", curUser);
         model.addAttribute("darkDesign", httpSession.getAttribute("darkDesign"));
@@ -44,9 +40,6 @@ public class EmailController {
     @RequestMapping(value = "/checkEmail", method = RequestMethod.POST)
     public String checkEmail(@Valid @ModelAttribute("curUser") User curUser, BindingResult bindingResult, @RequestParam String newEmail, Model model){
         User user = (User)httpSession.getAttribute("username");
-        if(user==null){
-            return "redirect:/";
-        }
         String regex = "\\w+@\\w+\\.\\w+";
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher= pattern.matcher(newEmail);

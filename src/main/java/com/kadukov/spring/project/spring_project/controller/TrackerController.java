@@ -26,9 +26,7 @@ public class TrackerController {
 
     @RequestMapping("/")
     public String start_page(Model model){
-        if(httpSession.getAttribute("username")==null){
-            return "redirect:/";
-        }
+
         User user = (User) httpSession.getAttribute("username");
         model.addAttribute("username", user.getUsername());
         List<Task> tasks = taskService.getTasks(true);
@@ -63,9 +61,6 @@ public class TrackerController {
 
     @RequestMapping("/addNewTask")
     public String addNewTask(Model model){
-        if(httpSession.getAttribute("username")==null){
-            return "redirect:/";
-        }
         Task task = new Task();
         task.setId(0); task.setIs_done(false); task.setCategory("default"); task.setRef_task(0);
         model.addAttribute("task", task);
@@ -75,9 +70,6 @@ public class TrackerController {
 
     @RequestMapping("/saveTask")
     public String saveTask(@Valid @ModelAttribute("task") Task task, BindingResult bindingResult){
-        if(httpSession.getAttribute("username")==null){
-            return "redirect:/";
-        }
         if(bindingResult.hasErrors()){
             return "showTask";
         }
@@ -91,9 +83,6 @@ public class TrackerController {
 
     @RequestMapping("/updateTask/{id}")
     public String updateInfo(@PathVariable int id, Model model){
-        if(httpSession.getAttribute("username")==null){
-            return "redirect:/";
-        }
         Task task = taskService.getTask(id);
         model.addAttribute("task", task);
         model.addAttribute("darkDesign", httpSession.getAttribute("darkDesign"));
@@ -102,36 +91,24 @@ public class TrackerController {
 
     @RequestMapping("/deleteTask/{id}")
     public String deleteInfo(@PathVariable int id){
-        if(httpSession.getAttribute("username")==null){
-            return "redirect:/";
-        }
         taskService.deleteTask(id);
         return "redirect:/task-tracker/";
     }
 
     @RequestMapping("/logout")
     public String exit(){
-        if(httpSession.getAttribute("username")==null){
-            return "redirect:/";
-        }
         httpSession.removeAttribute("username");
         return "redirect:/";
     }
 
     @RequestMapping("/markTask/{id}")
     public String markTask(@PathVariable int id){
-        if(httpSession.getAttribute("username")==null){
-            return "redirect:/";
-        }
         taskService.markTask(id);
         return "redirect:/task-tracker/";
     }
 
     @RequestMapping("/addRefTask/{id}")
     public String addRefTask(@PathVariable int id, Model model){
-        if(httpSession.getAttribute("username")==null){
-            return "redirect:/";
-        }
         Task task = new Task();
         task.setId(0); task.setIs_done(false); task.setCategory("none"); task.setRef_task(id);task.setPriority(0);
         model.addAttribute("task", task);

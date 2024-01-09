@@ -28,11 +28,7 @@ public class PasswordController {
 
     @RequestMapping("/editPassword")
     public String editPassword(Model model){
-        User user = (User)httpSession.getAttribute("username");
         model.addAttribute("darkDesign", httpSession.getAttribute("darkDesign"));
-        if(user==null){
-            return "redirect:/";
-        }
         User curUser = new User();
         model.addAttribute("curUser", curUser);
         return "edit_password";
@@ -40,9 +36,6 @@ public class PasswordController {
     @RequestMapping(value = "/checkPassword", method = RequestMethod.POST)
     public String checkPassword(@Valid @ModelAttribute("curUser") User curUser, BindingResult bindingResult, @RequestParam String newPassword, Model model){
         User user = (User)httpSession.getAttribute("username");
-        if(user==null){
-            return "redirect:/";
-        }
         System.out.println(newPassword + " " + curUser.getPassword());
         if(curUser.getPassword().equals(user.getPassword()) && newPassword.length()>=6){
             if(bindingResult.hasErrors()){
@@ -63,11 +56,7 @@ public class PasswordController {
 
     @RequestMapping("/madeChanges")
     public String madeChanges(Model model){
-        User user = (User)httpSession.getAttribute("username");
         model.addAttribute("darkDesign", httpSession.getAttribute("darkDesign"));
-        if(user==null){
-            return "redirect:/";
-        }
         return "made_changes";
     }
 
