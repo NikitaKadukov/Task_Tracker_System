@@ -1,334 +1,10 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>My_Tasks_Service</title>
-    <style>
-        .dark-mode {
-            background-color: #222;
-        }
-        body {
-            font-family: Arial, sans-serif;
-            margin: 21px;
-            background-color: #f4f4f4;
-        }
-
-        h1 {
-            color: #333;
-        }
-
-        h2 {
-            color: #555;
-        }
-
-        h1.to_do_list {
-            color: #333;
-            display: flex;
-            justify-content: space-between;
-        }
-
-        .title-left {
-            white-space: nowrap;
-            flex-grow: 20;
-            padding-left: 5%;
-            text-align: center;
-        }
-
-        .title-right {
-            white-space: nowrap;
-            flex-grow: 1;
-            color: #555;
-            font-size: 20px;
-        }
-        .title-left-dark {
-            white-space: nowrap;
-            flex-grow: 20;
-            padding-left: 5%;
-            color: #aec6cc;
-            text-align: center;
-        }
-
-        .title-right-dark {
-            white-space: nowrap;
-            flex-grow: 1;
-            color: #aec6cc;
-            font-size: 20px;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            overflow: hidden;
-        }
-
-        th, td {
-            border: 1px solid #ddd;
-            padding: 12px;
-            text-align: left;
-        }
-
-        table tr:nth-child(even) {
-            background-color: #f9f9f9;
-        }
-        table tr:nth-child(odd) {
-            background-color: #f4f4f4;
-        }
-
-        table.dark tr:nth-child(even) {
-            background-color: #aec6cc;
-            color: #222222;
-        }
-        table.dark tr:nth-child(odd) {
-            background-color: #8ba8af;
-            color: #222222;
-        }
-
-        a.head, a.oper{
-            color: #3498db;
-            text-decoration: none;
-            margin-right: 10px;
-            transition: color 0.3s ease-in-out;
-            cursor: pointer;
-            display: inline-block;
-            padding: 8px 4px;
-            padding-left: 6%;
-            padding-right: 6%;
-            border-radius: 4px;
-            border: 1px solid #3498db;
-            text-align: center;
-        }
-        a.darkhead, a.darkoper{
-            color: #aec6cc;
-            text-decoration: none;
-            margin-right: 10px;
-            transition: color 0.3s ease-in-out;
-            cursor: pointer;
-            display: inline-block;
-            padding: 8px 4px;
-            padding-left: 6%;
-            padding-right: 6%;
-            border-radius: 4px;
-            border: 1px solid #12496e;
-            text-align: center;
-        }
-
-        a:hover {
-            color: #1f618d;
-            background-color: #ecf0f1;
-        }
-        a.darkhead:hover, a.darkoper:hover {
-            color: #1f618d;
-            background-color: #97b5bd;
-        }
-        .action-buttons {
-            display: flex;
-        }
-
-        input[type="button"] {
-            background-color: #4caf50;
-            color: white;
-            padding: 20px 60px;
-            border: none;
-            cursor: pointer;
-            transition: background-color 0.3s ease-in-out;
-        }
-
-        input[type="button"]:hover {
-            background-color: #45a049;
-        }
-
-        header {
-            background-color: #3498db;
-            margin-left: -21px;
-            margin-right: -21px;
-            margin-top: -21px;
-            padding: 7px;
-            text-align: center;
-            color: #fff;
-            white-space: nowrap;
-        }
-        header.darkhead {
-            background-color: #1f618d;
-            margin-left: -21px;
-            margin-right: -21px;
-            margin-top: -21px;
-            padding: 7px;
-            text-align: center;
-            color: #aec6cc;
-            white-space: nowrap;
-        }
-
-        nav {
-            display: flex;
-            justify-content: space-around;
-            align-items: center;
-            white-space: nowrap;
-        }
-
-
-        nav a.head {
-            color: #fff;
-            text-decoration: none;
-            transition: color 0.3s ease-in-out;
-            border: none;
-            white-space: nowrap;
-        }
-        nav a.darkhead {
-            color: #aec6cc;
-            text-decoration: none;
-            transition: color 0.3s ease-in-out;
-            border: none;
-            white-space: nowrap;
-        }
-        tr th{
-            text-align: center;
-        }
-        tr th a {
-            color: #fff;
-            text-decoration: none;
-            text-align: center;
-            padding: 3% 7%;
-            transition: color 0.3s ease-in-out;
-            border: none;
-            white-space: nowrap;
-        }
-        tr th a:hover {
-            background-color: #d6f5fc;
-            color: #2d6675;
-        }
-        tr th a.dark {
-            color: #aec6cc;
-            text-decoration: none;
-            text-align: center;
-            padding: 3% 7%;
-            transition: color 0.3s ease-in-out;
-            border: none;
-            white-space: nowrap;
-        }
-        tr th a.dark:hover {
-            background-color: #2d6675;
-            color: #8ba8af;
-        }
-
-        nav a:hover {
-            background-color: #d6f5fc;
-            color: #2d6675;
-        }
-
-        .ending-soon {
-            color: white;
-            background-color: orange;
-            padding: 8px 12px;
-            border-radius: 4px;
-            box-shadow: 0 0 10px rgba(255, 165, 0, 0.5); /* Тень оранжевого цвета */
-            animation: pulse2 10s infinite; /* Анимация мерцания */
-        }
-
-        .ending-soon:hover {
-            background-color: darkorange; /* Изменение цвета при наведении */
-        }
-        .overdue {
-            color: white;
-            background-color: red;
-            padding: 8px 12px;
-            border-radius: 4px;
-            box-shadow: 0 0 10px rgba(255, 0, 0, 0.5); /* Тень красного цвета */
-            animation: pulse 10s infinite; /* Анимация мерцания */
-        }
-
-
-        @keyframes pulse2 {
-            0% { background-color: rgba(255, 165, 0, 0.7); }
-            50% { background-color: rgba(229, 151, 7, 0.5); }
-            100% { background-color: rgba(255, 165, 0, 0.7); }
-        }
-        @keyframes pulse {
-            0% { background-color: rgba(248, 42, 42, 0.7); }
-            50% { background-color: rgba(147, 4, 4, 0.4); }
-            100% { background-color: rgba(248, 42, 42, 0.7); }
-        }
-        .overdue:hover {
-            background-color: darkred; /* Изменение цвета при наведении */
-        }
-        .tdStat {
-            width: 12%;
-        }
-        .tdAdd {
-            width: 13%;
-        }
-        .tdTit {
-            width: 15%;
-        }
-        .tdDesc {
-            width: 23%;
-        }
-        .tdDead {
-            width: 10%;
-        }
-        .tdPrior {
-            width: 9%;
-        }
-        .tdOper {
-            width: 18%;
-        }
-
-        .ending-soon-subtask {
-            color: #d9534f;
-            text-decoration: none;
-            animation: blinkBorder 3s infinite;
-        }
-        @keyframes blinkBorder {
-            0%, 100% {
-                border: 3px solid #d9534f;
-            }
-            50% {
-                border: 1px solid #7e1916;
-            }
-        }
-        .completed-subtask {
-            border: 2px solid #5cb85c;
-            text-decoration: line-through;
-            color: #5cb85c;
-            animation: none;
-        }
-        .completed-task {
-            border: 4px solid #368f36;
-            font-weight: bold;
-            text-decoration: underline;
-            color: #368f36;
-            animation: none;
-        }
-        th {
-            background-color: #3498db;
-            color: #fff;
-        }
-        th.dark{
-            background-color: #1f618d;
-            border: 1px solid #01171c;
-            color: #aec6cc;
-        }
-
-        .button-container {
-            text-align: center;
-        }
-        .addButton{
-            transition: color 0.3s ease-in-out;
-            cursor: pointer;
-            display: inline-block;
-            font-size: 18px;
-            padding: 20px 60px;
-            border-radius: 4px;
-            border: 3px solid #146014;
-            text-align: center;
-        }
-
-        table.dark tr td a{
-            color: #222222;
-            border: 1px solid #222222;
-        }
-
-    </style>
+    <title>Трэкер</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="/css/basic_style.css">
 </head>
 <header th:class="${darkDesign} ? 'darkhead' : 'head'">
     <nav th:class="${darkDesign} ? 'darkhead' : 'head'">
@@ -393,14 +69,10 @@
                     <a href="#" class="oper" th:onclick="'confirmDelete(' + ${subTask.id} + ')'">Удалить</a>
                 </td>
             </tr>
-
-
         </table>
     </tbody>
 </table>
-
 <br><div class="button-container"><input type="button" class = "addButton" value="Добавить задание" onclick="window.location.href = 'addNewTask'"/></div>
-
 <h1 class="to_do_list">
     <span th:class="${darkDesign} ? 'title-left-dark' : 'title-left'">Выполненные задачи:</span>
 </h1>
@@ -427,7 +99,6 @@
             <a href="#" class="oper" th:onclick="'confirmDelete(' + ${task.id} + ')'" >Удалить</a>
         </td>
     </tr>
-
         <tr th:each="subTask : ${subTasks}" th:if="${subTask.ref_task == task.id}" class="completed-subtask">
             <td></td>
             <td th:text="${subTask.title}"></td>
@@ -437,12 +108,8 @@
                 <a href="#" class="oper" th:onclick="'confirmDelete(' + ${subTask.id} + ')'" >Удалить</a>
             </td>
         </tr>
-
     </table>
-
     </tbody>
 </table>
-
-
 </body>
 </html>

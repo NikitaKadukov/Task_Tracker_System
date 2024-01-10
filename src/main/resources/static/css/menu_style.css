@@ -1,0 +1,120 @@
+/********************Основа********************/
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+/********************Классы********************/
+.container {
+    text-align: center;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+.button {
+    display: inline-block;
+    padding: 10px 20px;
+    margin: 10px;
+    font-size: 16px;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+.button-primary {
+    color: #fff;
+    background-color: #3498db;
+    border: 2px solid #3498db;
+}
+.button-secondary {
+    color: #fff;
+    background-color: #e74c3c;
+    border: 2px solid #e74c3c;
+}
+.button-forgot {
+    color: #3498db;
+    text-decoration: none;
+    font-size: 14px;
+    margin-top: 10px;
+    display: block;
+}
+.form-group {margin-bottom: 20px;}
+.form-label {
+    display: block;
+    font-size: 16px;
+    margin-bottom: 5px;
+}
+.form-input {
+    width: 80%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+.button2 {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 16px;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    border-radius: 5px;
+    background-color: #3498db;
+    color: #fff;
+    border: 2px solid #3498db;
+    transition: background-color 0.3s ease;
+}
+.error-message {
+    color: red;
+    font-size: 14px;
+    margin-top: 5px;
+    animation: fadeIn 0.5s ease-in-out;
+}
+.philosophy {
+    font-size: 18px;
+    margin-bottom: 20px;
+}
+.comfort {
+    font-size: 16px;
+    color: #666;
+}
+/********************Формы********************/
+form {
+    max-width: 400px;
+    margin: 0 auto;
+    margin-top: 40px;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+}
+input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 16px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+}
+input[type="submit"] {
+    background-color: #4caf50;
+    color: white;
+    padding: 12px 36px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease-in-out;
+}
+input[type="submit"]:hover {background-color: #45a049;}
+/********************Анимация********************/
+@keyframes fadeIn {
+    from {opacity: 0;}
+    to {opacity: 1;}
+}

@@ -1,213 +1,8 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Профиль</title>
-    <style>
-        .dark-mode {
-            background-color: #222;
-        }
-        body {
-            font-family: 'Roboto', sans-serif;
-            margin: 21px;
-            background-color: #f4f4f4;
-            color: #333;
-            justify-content: center;
-            align-items: center;
-        }
-
-        h1 {
-            color: #333;
-            text-align: center;
-        }
-
-
-        .profile-container {
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
-        .profile-buttons {
-            display: flex;
-            justify-content: space-around;
-            margin-top: 20px;
-        }
-
-        .profile-button {
-            color: #fff;
-            text-decoration: none;
-            transition: background-color 0.3s ease-in-out;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 4px;
-            cursor: pointer;
-            text-align: center;
-        }
-
-        .profile-info {
-            margin-top: 20px;
-            text-align: left;
-        }
-
-        .info-item {
-            margin-bottom: 10px;
-        }
-
-        .info-label {
-            font-weight: bold;
-        }
-
-        .info-value {
-            margin-left: 10px;
-        }
-        .edit-password {
-            background-color: #4caf50;
-        }
-
-        .edit-email {
-            background-color: #3498db;
-        }
-
-        .dark_mode {
-            background-color: #342d1e;
-        }
-
-        .toggle-dark-mode {
-            background-color: #2c3e50;
-        }
-
-        .profile-button:hover {
-            background-color: #555;
-        }
-        a.head{
-            color: #3498db;
-            text-decoration: none;
-            margin-right: 10px;
-            transition: color 0.3s ease-in-out;
-            cursor: pointer;
-            display: inline-block;
-            padding: 8px 4px;
-            padding-left: 6%;
-            padding-right: 6%;
-            border-radius: 4px;
-            border: 1px solid #3498db;
-            text-align: center;
-        }
-        a.darkhead, a.darkoper{
-            color: #aec6cc;
-            text-decoration: none;
-            margin-right: 10px;
-            transition: color 0.3s ease-in-out;
-            cursor: pointer;
-            display: inline-block;
-            padding: 8px 4px;
-            padding-left: 6%;
-            padding-right: 6%;
-            border-radius: 4px;
-            border: 1px solid #12496e;
-            text-align: center;
-        }
-
-        a:hover {
-            color: #1f618d;
-            background-color: #ecf0f1;
-        }
-        a.darkhead:hover, a.darkoper:hover {
-            color: #1f618d;
-            background-color: #97b5bd;
-        }
-
-
-        header {
-            background-color: #3498db;
-            margin-left: -21px;
-            margin-right: -21px;
-            margin-top: -21px;
-            padding: 7px;
-            text-align: center;
-            color: #fff;
-            white-space: nowrap;
-        }
-        header.darkhead {
-            background-color: #1f618d;
-            margin-left: -21px;
-            margin-right: -21px;
-            margin-top: -21px;
-            padding: 7px;
-            text-align: center;
-            color: #aec6cc;
-            white-space: nowrap;
-        }
-
-        nav {
-            display: flex;
-            justify-content: space-around;
-            align-items: center;
-            white-space: nowrap;
-        }
-
-        nav a.head {
-            color: #fff;
-            text-decoration: none;
-            transition: color 0.3s ease-in-out;
-            border: none;
-            white-space: nowrap;
-        }
-        nav a.darkhead {
-            color: #aec6cc;
-            text-decoration: none;
-            transition: color 0.3s ease-in-out;
-            border: none;
-            white-space: nowrap;
-        }
-        nav a:hover {
-            background-color: #d6f5fc;
-            color: #2d6675;
-        }
-        body.dark-mode div div{
-            color: #aec6cc;
-        }
-        body.dark-mode div div h1{
-            color: #aec6cc;
-        }
-        .row {
-            display: flex;
-            justify-content: space-between;
-            margin: 5%;
-        }
-
-        .block {
-            width: 35%;
-            text-align: center;
-            padding: 10px;
-            border: 2px solid #3498db;
-            border-radius: 8px;
-            margin: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease-in-out;
-        }
-        .block:hover {
-            transform: scale(1.05);
-        }
-
-        .block img {
-            max-width: 100%;
-            height: auto;
-            border-radius: 8px;
-            margin-bottom: 10px;
-        }
-        .block p {
-            color: #333;
-            font-size: 16px;
-            line-height: 1.4;
-            margin-top: 10px;
-        }
-        body.dark-mode .row .block p{
-            color: #aec6cc;
-        }
-        body.dark-mode h1{
-            color: #aec6cc;
-        }
-    </style>
+    <title>О нас..</title>
+    <link rel="stylesheet" type="text/css" href="/css/basic_style.css">
 </head>
 <header th:class="${darkDesign} ? 'darkhead' : 'head'">
     <nav th:class="${darkDesign} ? 'darkhead' : 'head'">
@@ -218,9 +13,7 @@
     </nav>
 </header>
 <body th:class="${darkDesign} ? 'dark-mode' : ''">
-
-<h1>О сайте</h1>
-
+<h1 style="text-align: center">О сайте</h1>
 <div class="row">
     <div class="block">
         <img src="https://asbtasktracker.com/wp-content/uploads/2022/01/tasktracker-logo-hor-green.png" alt="Image-logo">
@@ -228,40 +21,32 @@
         <hr><p>Проект можно рассматривать не только как компонент резюме. Если Вам понравился функционал сайта, то вы вполне можете использовать его для личных или рабочих целей. Я буду очень этому рад.</p>
         <hr><p>Вы также можете отправлять обратную связь о сайте на адрес nikitaets2016@gmail.com. Буду рад вашим сообщениям!</p>
     </div>
-
     <div>
     </div>
 </div>
-
 <div class="row">
     <div>
     </div>
-
     <div class="block">
         <img src="your_image_url_4" alt="Image 4">
         <p>Текст блока 4</p>
     </div>
 </div>
-
 <div class="row">
     <div class="block">
         <img src="your_image_url_1" alt="Image 1">
         <p>Текст блока 1</p>
     </div>
-
     <div>
     </div>
 </div>
-
 <div class="row">
     <div>
     </div>
-
     <div class="block">
         <img src="your_image_url_4" alt="Image 4">
         <p>Текст блока 4</p>
     </div>
 </div>
-
 </body>
 </html>

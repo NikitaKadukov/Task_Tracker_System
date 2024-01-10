@@ -2,225 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Админка</title>
-    <style>
-        .dark-mode {
-            background-color: #222;
-        }
-        body {
-            font-family: Arial, sans-serif;
-            margin: 21px;
-            background-color: #f4f4f4;
-            color: #333;
-            justify-content: center;
-            align-items: center;
-        }
-
-
-        h1 {
-            color: #333;
-            text-align: center;
-        }
-
-        h2 {
-            color: #555;
-        }
-
-        h1.to_do_list {
-            color: #333;
-            display: flex;
-            justify-content: space-between;
-        }
-
-        .title-left {
-            white-space: nowrap;
-            flex-grow: 20;
-            padding-left: 5%;
-            text-align: center;
-        }
-
-        .title-right {
-            white-space: nowrap;
-            flex-grow: 1;
-            color: #555;
-            font-size: 20px;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            overflow: hidden;
-        }
-
-        th, td {
-            border: 1px solid #ddd;
-            padding: 12px;
-            text-align: left;
-        }
-
-
-
-        table tr:nth-child(even) {
-            background-color: #f9f9f9;
-        }
-        table tr:nth-child(odd) {
-            background-color: #f4f4f4;
-        }
-
-        table.dark tr:nth-child(even) {
-            background-color: #aec6cc;
-            color: #222222;
-        }
-        table.dark tr:nth-child(odd) {
-            background-color: #8ba8af;
-            color: #222222;
-        }
-        a.head, a.oper{
-            color: #3498db;
-            text-decoration: none;
-            margin-right: 10px;
-            transition: color 0.3s ease-in-out;
-            cursor: pointer;
-            display: inline-block;
-            padding: 8px 4px;
-            padding-left: 6%;
-            padding-right: 6%;
-            border-radius: 4px;
-            border: 1px solid #3498db;
-            text-align: center;
-        }
-        a.darkhead, a.darkoper{
-            color: #aec6cc;
-            text-decoration: none;
-            margin-right: 10px;
-            transition: color 0.3s ease-in-out;
-            cursor: pointer;
-            display: inline-block;
-            padding: 8px 4px;
-            padding-left: 6%;
-            padding-right: 6%;
-            border-radius: 4px;
-            border: 1px solid #12496e;
-            text-align: center;
-        }
-
-        a:hover {
-            color: #1f618d;
-            background-color: #ecf0f1;
-        }
-
-
-        header {
-            background-color: #3498db;
-            margin-left: -21px;
-            margin-right: -21px;
-            margin-top: -21px;
-            padding: 7px;
-            text-align: center;
-            color: #fff;
-            white-space: nowrap;
-        }
-        header.darkhead {
-            background-color: #1f618d;
-            margin-left: -21px;
-            margin-right: -21px;
-            margin-top: -21px;
-            padding: 7px;
-            text-align: center;
-            color: #aec6cc;
-            white-space: nowrap;
-        }
-
-        nav {
-            display: flex;
-            justify-content: space-around;
-            align-items: center;
-            white-space: nowrap;
-        }
-
-        .tdName {
-            width: 15%;
-        }
-        .tdStat {
-            width: 23%;
-        }
-        .tdRole {
-            width: 10%;
-        }
-        .tdMail {
-            width: 9%;
-        }
-        .tdOper {
-            width: 18%;
-        }
-
-        nav a.head {
-            color: #fff;
-            text-decoration: none;
-            transition: color 0.3s ease-in-out;
-            border: none;
-            white-space: nowrap;
-        }
-        nav a.darkhead {
-            color: #aec6cc;
-            text-decoration: none;
-            transition: color 0.3s ease-in-out;
-            border: none;
-            white-space: nowrap;
-        }
-        tr th{
-            text-align: center;
-        }
-        tr th a {
-            color: #fff;
-            text-decoration: none;
-            text-align: center;
-            padding: 3% 7%;
-            transition: color 0.3s ease-in-out;
-            border: none;
-            white-space: nowrap;
-        }
-        tr th a.dark {
-            color: #aec6cc;
-            text-decoration: none;
-            text-align: center;
-            padding: 3% 7%;
-            transition: color 0.3s ease-in-out;
-            border: none;
-            white-space: nowrap;
-        }
-        tr th a:hover {
-            background-color: #d6f5fc;
-            color: #2d6675;
-        }
-        tr th a.dark:hover {
-            background-color: #2d6675;
-            color: #8ba8af;
-        }
-
-        nav a:hover {
-            background-color: #d6f5fc;
-            color: #2d6675;
-        }
-        th {
-            background-color: #3498db;
-            color: #fff;
-        }
-        th.dark{
-            background-color: #1f618d;
-            border: 1px solid #01171c;
-            color: #aec6cc;
-        }
-        table.dark tr td a{
-            color: #222222;
-            border: 1px solid #222222;
-        }
-
-        body.dark-mode h1{
-            color: #aec6cc;
-        }
-    </style>
+    <link rel="stylesheet" type="text/css" href="/css/basic_style.css">
 </head>
 <header th:class="${darkDesign} ? 'darkhead' : 'head'">
     <nav th:class="${darkDesign} ? 'darkhead' : 'head'">
@@ -230,16 +12,15 @@
         <a href="/task-tracker/logout" th:class="${darkDesign} ? 'darkhead' : 'head'">Выйти</a>
     </nav>
 </header>
-
 <body th:class="${darkDesign} ? 'dark-mode' : ''">
-<h1 class="to_do_list">
+<h1 class="to_do_list" style="text-align: center">
     <span class="title-left">Пользователи: </span>
 </h1>
 <table th:class="${darkDesign} ? 'dark' : ''">
     <thead>
     <tr th:class="${darkDesign} ? 'dark' : ''">
         <th th:class="${darkDesign} ? 'tdName dark' : 'tdName'"><a th:class="${darkDesign} ? 'dark' : ''">Имя</a></th>
-        <th th:class="${darkDesign} ? 'tdStat dark' : 'tdStat'"><a th:class="${darkDesign} ? 'dark' : ''">Статус</a></th>
+        <th th:class="${darkDesign} ? 'tdStatus dark' : 'tdStatus'"><a th:class="${darkDesign} ? 'dark' : ''">Статус</a></th>
         <th th:class="${darkDesign} ? 'tdRole dark' : 'tdRole'"><a th:class="${darkDesign} ? 'dark' : ''">Роль</a></th>
         <th th:class="${darkDesign} ? 'tdMail dark' : 'tdMail'"><a th:class="${darkDesign} ? 'dark' : ''">Почта</a></th>
         <th th:class="${darkDesign} ? 'tdOper dark' : 'tdOper'">ОПЕРАЦИИ</th>
@@ -248,11 +29,11 @@
     <tbody>
         <tr th:each="user : ${users}" >
             <td th:text="${user.username}" class="tdName"></td>
-            <td th:if = "${user.enabled==true}" th:text="Активен" class="tdStat"></td>
-            <td th:if = "${user.enabled==false}" th:text="Заблокирован" class="tdStat"></td>
+            <td th:if = "${user.enabled==true}" th:text="Активен" class="tdStatus"></td>
+            <td th:if = "${user.enabled==false}" th:text="Заблокирован" class="tdStatus"></td>
             <td th:text="${user.role}" class="tdRole" style="text-align: center"></td>
             <td th:text="${user.email}" class="tdMail" style="text-align: center;"></td>
-            <td class="tdOper">
+            <td class="tdOper2">
                 <a th:if = "${curUser.role == 'admin' && user.role=='subAdmin'}" th:href="@{changeRole/{username}(username=${user.username})}" class = "oper">Сделать User'ом</a>
                 <a th:if = "${curUser.role == 'admin' && user.role=='user'}" th:href="@{changeRole/{username}(username=${user.username})}" class = "oper">Сделать subAdmin'ом</a>
                 <a th:if = "${user.enabled==true}" th:href="@{blockUser/{username}(username=${user.username})}" class = "oper">Заблокировать</a>
@@ -261,6 +42,5 @@
         </tr>
     </tbody>
 </table>
-
 </body>
 </html>

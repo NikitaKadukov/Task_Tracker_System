@@ -1,95 +1,23 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
-
-    <style>
-        body {
-            font-family: 'Arial', sans-serif;
-            background-color: #f4f4f4;
-            margin: 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-        }
-
-        .container {
-            text-align: center;
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-
-        .form-group {
-            margin-bottom: 20px;
-        }
-
-        .form-label {
-            display: block;
-            font-size: 16px;
-            margin-bottom: 5px;
-        }
-
-        .form-input {
-            width: 80%;
-            padding: 10px;
-            font-size: 16px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
-
-        .button {
-            display: inline-block;
-            padding: 10px 20px;
-            font-size: 16px;
-            text-align: center;
-            text-decoration: none;
-            cursor: pointer;
-            border-radius: 5px;
-            background-color: #3498db;
-            color: #fff;
-            border: 2px solid #3498db;
-            transition: background-color 0.3s ease;
-        }
-        .error-message {
-            color: red;
-            font-size: 14px;
-            margin-top: 5px;
-            animation: fadeIn 0.5s ease-in-out;
-        }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-            }
-            to {
-                opacity: 1;
-            }
-        }
-    </style>
-    <title>Registration Page</title>
+    <link rel="stylesheet" type="text/css" href="/css/menu_style.css">
+    <title>Регистрация</title>
 </head>
 <body>
-
 <div class="container">
-    <h2>Registration</h2>
-
+    <h2>РЕГИСТРАЦИЯ</h2>
     <form action="/saveUser" method="post" style="padding: 20px" th:object="${user}">
-        Username: <input class="form-input" type="text" th:field="*{username}" /><br>
-        <span th:if="${#fields.hasErrors('username')}" th:errors="*{username}" class="error-message"></span><br><br>
-
-        Password: <input class="form-input" type="password" th:field="*{password}" /><br>
+        Логин: <input class="form-input" type="text" th:field="*{username}" /><br>
+        <span th:if="${#fields.hasErrors('username')}" th:errors="*{username}" class="error-message"></span><br>
+        Пароль: <input class="form-input" type="password" th:field="*{password}" /><br>
         <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="error-message"></span>
-        <br><br>
-
-        Email: <input class="form-input" type="email" th:field="*{email}" /><br>
+        <br>
+        Почта: <input class="form-input" type="email" th:field="*{email}" /><br>
         <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="error-message"></span>
-        <br><br>
-
-        <input type="submit" class="button" value="Зарегистрироваться" />
+        <br>
+        <input type="submit" class="button2" value="Зарегистрироваться" />
     </form>
 </div>
-
 </body>
 </html>
