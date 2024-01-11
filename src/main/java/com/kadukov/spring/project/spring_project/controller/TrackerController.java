@@ -27,29 +27,29 @@ public class TrackerController {
     @RequestMapping("/")
     public String start_page(Model model){
 
-        User user = (User) httpSession.getAttribute("username");
+        User user = (User) httpSession.getAttribute("user");
         model.addAttribute("username", user.getUsername());
         List<Task> tasks = taskService.getTasks(true);
         List<Task> subTasks = taskService.getTasks(false);
 
-        String curSorted = (String)httpSession.getAttribute("sortList");
+        String curSorting = (String)httpSession.getAttribute("sortList");
 
-        boolean chetSort = (boolean) httpSession.getAttribute("chetSort");
+        boolean paritySort = (boolean) httpSession.getAttribute("paritySort");
 
-        if (curSorted.equals("priority")) {
+        if (curSorting.equals("priority")) {
             tasks.sort(Task.priorityComparator);
         }
-        if (curSorted.equals("title")) {
+        if (curSorting.equals("title")) {
             tasks.sort(Task.titleComparator);
         }
-        if (curSorted.equals("description")) {
+        if (curSorting.equals("description")) {
             tasks.sort(Task.descriptionComparator);
         }
-        if (curSorted.equals("deadline")) {
+        if (curSorting.equals("deadline")) {
             tasks.sort(Task.deadlineComparator);
         }
 
-        if(chetSort){
+        if(paritySort){
             Collections.reverse(tasks);
         }
 
@@ -74,7 +74,7 @@ public class TrackerController {
             return "showTask";
         }
         else {
-            User user = (User) httpSession.getAttribute("username");
+            User user = (User) httpSession.getAttribute("user");
             task.setOwner(user.getUsername());
             taskService.saveTask(task);
             return "redirect:/task-tracker/";
@@ -97,7 +97,11 @@ public class TrackerController {
 
     @RequestMapping("/logout")
     public String exit(){
-        httpSession.removeAttribute("username");
+        httpSession.removeAttribute("user");
+        httpSession.removeAttribute("sortList");
+        httpSession.removeAttribute("sortListLast");
+        httpSession.removeAttribute("darkDesign");
+        httpSession.removeAttribute("paritySort");
         return "redirect:/";
     }
 

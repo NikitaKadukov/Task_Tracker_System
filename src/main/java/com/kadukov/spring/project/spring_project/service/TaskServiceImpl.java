@@ -1,6 +1,5 @@
 package com.kadukov.spring.project.spring_project.service;
 
-
 import com.kadukov.spring.project.spring_project.dao.TaskDAO;
 import com.kadukov.spring.project.spring_project.entity.Task;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -55,12 +54,28 @@ public class TaskServiceImpl implements TaskService {
     @Transactional
     @Override
     public int numDoneTask(boolean root) {
-        return taskDAO.numDoneTask(root);
+        List<Task> taskList = getTasks(root);
+        int cnt = 0;
+        for(Task task: taskList){
+            if(task.isIs_done()) cnt++;
+        }
+        return cnt;
     }
 
     @Transactional
     @Override
     public void markTask(int id) {
         taskDAO.markTask(id);
+    }
+
+    @Transactional
+    @Override
+    public boolean existTaskById(int id, boolean root, String username){
+        for(Task taskcur: taskDAO.getTasks(root, username)){
+            if(taskcur.getId()==id){
+                return true;
+            }
+        }
+        return false;
     }
 }

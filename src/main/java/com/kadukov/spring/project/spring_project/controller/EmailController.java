@@ -1,7 +1,6 @@
 package com.kadukov.spring.project.spring_project.controller;
 
 import com.kadukov.spring.project.spring_project.entity.User;
-import com.kadukov.spring.project.spring_project.service.MailSender;
 import com.kadukov.spring.project.spring_project.service.TaskService;
 import com.kadukov.spring.project.spring_project.service.UserService;
 import jakarta.servlet.http.HttpSession;
@@ -9,7 +8,6 @@ import jakarta.validation.Valid;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -30,7 +28,6 @@ public class EmailController {
     @Autowired
     HttpSession httpSession;
 
-
     @RequestMapping("/editEmail")
     public String editEmail(Model model){
         User curUser = new User();
@@ -40,7 +37,7 @@ public class EmailController {
     }
     @RequestMapping(value = "/checkEmail", method = RequestMethod.POST)
     public String checkEmail(@Valid @ModelAttribute("curUser") User curUser, BindingResult bindingResult, @RequestParam String newEmail, Model model){
-        User user = (User)httpSession.getAttribute("username");
+        User user = (User)httpSession.getAttribute("user");
         String regex = "\\w+@\\w+\\.\\w+";
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher= pattern.matcher(newEmail);

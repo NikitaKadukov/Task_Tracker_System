@@ -35,8 +35,7 @@ public class PasswordController {
     }
     @RequestMapping(value = "/checkPassword", method = RequestMethod.POST)
     public String checkPassword(@Valid @ModelAttribute("curUser") User curUser, BindingResult bindingResult, @RequestParam String newPassword, Model model){
-        User user = (User)httpSession.getAttribute("username");
-        System.out.println(newPassword + " " + curUser.getPassword());
+        User user = (User)httpSession.getAttribute("user");
         if(curUser.getPassword().equals(user.getPassword()) && newPassword.length()>=6){
             if(bindingResult.hasErrors()){
                 return "edit_password";
@@ -59,6 +58,5 @@ public class PasswordController {
         model.addAttribute("darkDesign", httpSession.getAttribute("darkDesign"));
         return "made_changes";
     }
-
 
 }

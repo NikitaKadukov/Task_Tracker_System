@@ -1,6 +1,5 @@
 package com.kadukov.spring.project.spring_project.service;
 
-import com.kadukov.spring.project.spring_project.entity.Task;
 import com.kadukov.spring.project.spring_project.entity.User;
 
 import java.util.List;

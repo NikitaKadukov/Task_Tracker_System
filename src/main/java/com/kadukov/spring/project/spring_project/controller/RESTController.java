@@ -55,7 +55,6 @@ public class RESTController {
         User user = new User();
         user.setUsername(loginData.getUsername());
         user.setPassword(loginData.getPassword());
-        System.out.println(user);
         if (userService.valid(user)) {
             Task task = taskService.getTask(id);
             if(task==null){
@@ -74,26 +73,17 @@ public class RESTController {
         String username = taskRequest.getLoginData().getUsername();
         user.setUsername(username);
         user.setPassword(taskRequest.getLoginData().getPassword());
-        System.out.println(user);
         Task task = taskRequest.getTask();
         task.setIs_done(false);
         task.setOwner(username);
         task.setCategory("none");
-        boolean flag = true;
 
         if(task.getRef_task()!=0){
-            flag = false;
-            for(Task taskcur: taskService.getTasks(true, username)){
-                if(taskcur.getId()==task.getRef_task()){
-                    flag = true;
-                    break;
-                }
+            if(!taskService.existTaskById(task.getRef_task(), true, username)){
+                throw new NoSuchTaskException("Нет доступа к этому заданию");
             }
         }
-        if(!flag){
-            throw new NoSuchTaskException("Нет доступа к этому заданию");
-        }
-        System.out.println(user);
+
         if (userService.valid(user)) {
                 taskService.saveTask(task);
         }
@@ -108,48 +98,24 @@ public class RESTController {
         String username = taskRequest.getLoginData().getUsername();
         user.setUsername(username);
         user.setPassword(taskRequest.getLoginData().getPassword());
-        System.out.println(user);
         Task task = taskRequest.getTask();
         task.setIs_done(false);
         task.setOwner(username);
         task.setCategory("none");
 
-        boolean flag2 = false;
-
         if (!userService.valid(user)){
             throw new NoSuchUserException("Нет такого пользователя");
         }
 
-        for(Task taskcur: taskService.getTasks(true, username)){
-            if(taskcur.getId()==task.getId()){
-                flag2 = true;
-                break;
-            }
-        }
-        for(Task taskcur: taskService.getTasks(false, username)){
-            if(taskcur.getId()==task.getId()){
-                flag2 = true;
-                break;
-            }
-        }
-        if(!flag2){
+        if(!taskService.existTaskById(task.getId(), true, username) &&
+                !taskService.existTaskById(task.getId(), false, username)){
             throw new NoSuchTaskException("Нет такого задания");
         }
-        boolean flag = true;
 
-        if(task.getRef_task()!=0){
-            flag = false;
-            for(Task taskcur: taskService.getTasks(true, username)){
-                if(taskcur.getId()==task.getRef_task()){
-                    flag = true;
-                    break;
-                }
-            }
-        }
-        if(!flag){
+        if(task.getRef_task()!=0 && !taskService.existTaskById(task.getRef_task(), true, username)){
             throw new NoSuchTaskException("Нет доступа к этому заданию");
         }
-        System.out.println(user);
+
         taskService.saveTask(task);
     }
 
@@ -159,32 +125,15 @@ public class RESTController {
         String username = loginData.getUsername();
         user.setUsername(username);
         user.setPassword(loginData.getPassword());
-        System.out.println(user);
-
-        boolean flag = false;
 
         if (!userService.valid(user)) {
             throw new NoSuchUserException("Нет такого пользователя");
         }
 
-        for(Task taskcur: taskService.getTasks(true, username)){
-            if(taskcur.getId()==id){
-                System.out.println(taskcur.getId());
-                flag = true;
-                break;
-            }
-        }
-        for(Task taskcur: taskService.getTasks(false, username)){
-            if(taskcur.getId()==id){
-                flag = true;
-                break;
-            }
-        }
-        if(!flag){
+        if(!taskService.existTaskById(id, true, username) &&
+                !taskService.existTaskById(id, false, username)){
             throw new NoSuchTaskException("Нет такого задания или доступа к нему");
         }
-
-        System.out.println(user);
 
         taskService.deleteTask(id, username);
     }
@@ -195,32 +144,16 @@ public class RESTController {
         String username = loginData.getUsername();
         user.setUsername(username);
         user.setPassword(loginData.getPassword());
-        System.out.println(user);
-
-        boolean flag = false;
 
         if (!userService.valid(user)) {
             throw new NoSuchUserException("Нет такого пользователя");
         }
 
-        for(Task taskcur: taskService.getTasks(true, username)){
-            if(taskcur.getId()==id){
-                System.out.println(taskcur.getId());
-                flag = true;
-                break;
-            }
-        }
-        for(Task taskcur: taskService.getTasks(false, username)){
-            if(taskcur.getId()==id){
-                flag = true;
-                break;
-            }
-        }
-        if(!flag){
+        if(!taskService.existTaskById(id, true, username) &&
+                !taskService.existTaskById(id, false, username)){
             throw new NoSuchTaskException("Нет такого задания или доступа к нему");
         }
 
-        System.out.println(user);
         taskService.markTask(id);
     }
 

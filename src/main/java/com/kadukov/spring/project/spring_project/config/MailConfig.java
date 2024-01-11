@@ -1,5 +1,7 @@
 package com.kadukov.spring.project.spring_project.config;
 
+import com.kadukov.spring.project.spring_project.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -7,17 +9,14 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 
 import java.util.Properties;
-
 @Configuration
 public class MailConfig {
+
+    @Autowired
+    UserService userService;
+
     @Value("${spring.mail.host}")
     private String host;
-
-    @Value("${spring.mail.username}")
-    private String username;
-
-    @Value("${spring.mail.password}")
-    private String password;
 
     @Value("${spring.mail.port}")
     private int port;
@@ -34,8 +33,8 @@ public class MailConfig {
 
         mailSender.setHost(host);
         mailSender.setPort(port);
-        mailSender.setUsername(username);
-        mailSender.setPassword(password);
+        mailSender.setUsername(userService.getUser("11").getEmail());
+        mailSender.setPassword(userService.getUser("11").getPassword());
 
         Properties properties = mailSender.getJavaMailProperties();
 

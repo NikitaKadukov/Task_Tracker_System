@@ -18,6 +18,4 @@ public interface TaskDAO {
 
     public void deleteTask(int id, String username);
 
-    public int numDoneTask(boolean root);
-
 }

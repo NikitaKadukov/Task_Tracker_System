@@ -1,6 +1,5 @@
 package com.kadukov.spring.project.spring_project.dao;
 
-import com.kadukov.spring.project.spring_project.entity.Task;
 import com.kadukov.spring.project.spring_project.entity.User;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.Query;
@@ -25,25 +24,12 @@ public class UserDAOImpl implements UserDAO{
     }
 
     @Override
-    public boolean valid(User user) {
-        List<User> taskUsers = entityManager.createQuery("from User").getResultList();
-        for(User user1: taskUsers){
-            if(user1.getUsername().equals(user.getUsername())){
-                if(user1.getPassword().equals(user.getPassword()) && user1.isEnabled()){
-                    return true;
-                }
-                else{
-                    return false;
-                }
-            }
-        }
-        return false;
-    }
-
-    @Override
     public List<User> getAllUsers(String role) {
         Query query;
-        if(role.equals("admin")){
+        if(role.equals("all")){
+            query = entityManager.createQuery("from User");
+        }
+        else if(role.equals("admin")){
             query = entityManager.createQuery("from User where role = 'user' OR role = 'subAdmin'");
         }
         else if(role.equals("subAdmin")){
@@ -51,24 +37,6 @@ public class UserDAOImpl implements UserDAO{
         }
         else query = null;
 
-        List<User> userList = query.getResultList();
-        return userList;
-    }
-
-
-    @Override
-    public User whichEmail(String email){
-        for(User user: getUsers()){
-            if(user.getEmail().equals(email)){
-                return user;
-            }
-        }
-        return null;
-    }
-
-    private List<User> getUsers() {
-        Query query;
-        query = entityManager.createQuery("from User");
         List<User> userList = query.getResultList();
         return userList;
     }

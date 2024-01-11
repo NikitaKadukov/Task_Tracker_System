@@ -25,7 +25,7 @@ public class AccessAspect {
 
     @Around("methodsForAccess()")
     public Object checkAdvice(ProceedingJoinPoint proceedingJoinPoint) throws Throwable{
-        if(httpSession.getAttribute("username")==null){
+        if(httpSession.getAttribute("user")==null){
             return "redirect:/";
         }
         return proceedingJoinPoint.proceed();

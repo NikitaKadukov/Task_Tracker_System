@@ -8,7 +8,6 @@ import jakarta.validation.constraints.Size;
 
 import java.time.LocalDate;
 import java.util.Comparator;
-import java.util.Date;
 
 @Entity
 @Table(name = "tasks")

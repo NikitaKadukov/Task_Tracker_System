@@ -21,7 +21,7 @@ public class TaskDAOImpl implements TaskDAO{
 
     @Override
     public List<Task> getTasks(boolean root) {
-        User user = (User)httpSession.getAttribute("username");
+        User user = (User)httpSession.getAttribute("user");
         String username = user.getUsername();
         Query query;
         if(root) query = entityManager.createQuery("from Task where owner = :user AND ref_task = 0");
@@ -80,16 +80,6 @@ public class TaskDAOImpl implements TaskDAO{
                 query.executeUpdate();
             }
         }
-    }
-
-    @Override
-    public int numDoneTask(boolean root) {
-        List<Task> taskList = getTasks(root);
-        int cnt = 0;
-        for(Task task: taskList){
-            if(task.isIs_done()) cnt++;
-        }
-        return cnt;
     }
 
     @Override

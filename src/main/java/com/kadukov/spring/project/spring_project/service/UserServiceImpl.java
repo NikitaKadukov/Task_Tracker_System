@@ -1,6 +1,5 @@
 package com.kadukov.spring.project.spring_project.service;
 
-import com.kadukov.spring.project.spring_project.dao.TaskDAO;
 import com.kadukov.spring.project.spring_project.dao.UserDAO;
 import com.kadukov.spring.project.spring_project.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,7 +49,18 @@ public class UserServiceImpl implements UserService{
     @Transactional
     @Override
     public boolean valid(User user) {
-        return userDAO.valid(user);
+        List<User> listUsers = getAllUsers("all");
+        for(User curUser: listUsers){
+            if(curUser.getUsername().equals(user.getUsername())){
+                if(curUser.getPassword().equals(user.getPassword()) && curUser.isEnabled()){
+                    return true;
+                }
+                else{
+                    return false;
+                }
+            }
+        }
+        return false;
     }
 
     @Transactional
@@ -64,6 +74,11 @@ public class UserServiceImpl implements UserService{
     @Transactional
     @Override
     public User whichEmail(String email){
-        return userDAO.whichEmail(email);
+        for(User user: getAllUsers("all")){
+            if(user.getEmail().equals(email)){
+                return user;
+            }
+        }
+        return null;
     }
 }

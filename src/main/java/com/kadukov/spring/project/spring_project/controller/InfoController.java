@@ -1,19 +1,13 @@
 package com.kadukov.spring.project.spring_project.controller;
 
-import com.kadukov.spring.project.spring_project.entity.Task;
 import com.kadukov.spring.project.spring_project.entity.User;
 import com.kadukov.spring.project.spring_project.service.TaskService;
 import com.kadukov.spring.project.spring_project.service.UserService;
 import jakarta.servlet.http.HttpSession;
-import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class InfoController {
@@ -33,7 +27,7 @@ public class InfoController {
         model.addAttribute("numDoneTask", taskService.numDoneTask(true));
         model.addAttribute("numSubTask", taskService.getTasks(false).size());
         model.addAttribute("numDoneSubTask", taskService.numDoneTask(false));
-        model.addAttribute("user", (User)httpSession.getAttribute("username"));
+        model.addAttribute("user", (User)httpSession.getAttribute("user"));
         model.addAttribute("darkDesign", httpSession.getAttribute("darkDesign"));
         return "profile";
     }
@@ -46,17 +40,21 @@ public class InfoController {
 
     @RequestMapping("/adminPage")
     public String adminPage(Model model){
-        User user = (User)httpSession.getAttribute("username");
+        User user = (User)httpSession.getAttribute("user");
         model.addAttribute("darkDesign", httpSession.getAttribute("darkDesign"));
         if(!user.getRole().equals("admin") && !user.getRole().equals("subAdmin")){
             return "redirect:/";
         }
-        model.addAttribute("users", userService.getAllUsers(((User)httpSession.getAttribute("username")).getRole()));
-        model.addAttribute("curUser", (User)httpSession.getAttribute("username"));
+        model.addAttribute("users", userService.getAllUsers(((User)httpSession.getAttribute("user")).getRole()));
+        model.addAttribute("curUser", (User)httpSession.getAttribute("user"));
         model.addAttribute("darkDesign", httpSession.getAttribute("darkDesign"));
         return "admin_page";
     }
 
-
+    @RequestMapping("/about")
+    public String about(HttpSession httpSession, Model model){
+        model.addAttribute("darkDesign", httpSession.getAttribute("darkDesign"));
+        return "about_page";
+    }
 
 }
