@@ -33,8 +33,10 @@ public class MailConfig {
 
         mailSender.setHost(host);
         mailSender.setPort(port);
-        mailSender.setUsername(userService.getUser("11").getEmail());
-        mailSender.setPassword(userService.getUser("11").getPassword());
+        mailSender.setUsername("nikitaets2016@yandex.ru");
+        mailSender.setPassword("qwdefrgtrhyu");
+        //mailSender.setUsername(userService.getUser("11").getEmail());
+        //mailSender.setPassword(userService.getUser("11").getPassword());
 
         Properties properties = mailSender.getJavaMailProperties();
 

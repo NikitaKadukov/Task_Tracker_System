@@ -1,10 +1,12 @@
 package com.kadukov.spring.project.spring_project.entity;
 
-import jakarta.persistence.*;
-import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
+import org.springframework.format.annotation.DateTimeFormat;
+
+import javax.persistence.*;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import java.time.LocalDate;
 import java.util.Comparator;
@@ -31,6 +33,7 @@ public class Task{
     @Column
     private String owner;
     @Column
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     @NotNull(message = "Пропишите дату")
     private LocalDate deadline;
 

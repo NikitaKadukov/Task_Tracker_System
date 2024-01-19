@@ -1,7 +1,7 @@
 package com.kadukov.spring.project.spring_project.entity;
 
-import jakarta.persistence.*;
-import jakarta.validation.constraints.Pattern;
+import javax.persistence.*;
+import javax.validation.constraints.Pattern;
 
 @Entity
 @Table(name = "users")

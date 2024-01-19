@@ -6,7 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.servlet.resource.NoResourceFoundException;
+import org.springframework.web.servlet.NoHandlerFoundException;
 
 @ControllerAdvice
 public class GlobalExceptionHandler {
@@ -27,7 +27,7 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    public String handleResourceNotFoundException(NoResourceFoundException ex, Model model) {
+    public String handleResourceNotFoundException(NoHandlerFoundException ex, Model model) {
         model.addAttribute("status", 404);
         model.addAttribute("errorMessage", "Нет такой страницы");
         return "error";
