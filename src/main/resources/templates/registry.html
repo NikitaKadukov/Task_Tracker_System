@@ -1,19 +1,20 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="/css/menu_style.css">
     <title>Регистрация</title>
 </head>
 <body>
 <div class="container">
     <h2>РЕГИСТРАЦИЯ</h2>
-    <form action="/saveUser" method="post" style="padding: 20px" th:object="${user}">
-        Логин: <input class="form-input" type="text" th:field="*{username}" /><br>
+    <form action="/saveUser" method="post" style="padding: 20px; margin-top: 20px" th:object="${user}">
+        Логин: <br><input class="form-input" type="text" th:field="*{username}" />
         <span th:if="${#fields.hasErrors('username')}" th:errors="*{username}" class="error-message"></span><br>
-        Пароль: <input class="form-input" type="password" th:field="*{password}" /><br>
+        Пароль: <br><input class="form-input" type="password" th:field="*{password}" />
         <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="error-message"></span>
         <br>
-        Почта: <input class="form-input" type="email" th:field="*{email}" /><br>
+        Почта: <br><input class="form-input" type="email" th:field="*{email}" />
         <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="error-message"></span>
         <br>
         <input type="submit" class="button2" value="Зарегистрироваться" />
