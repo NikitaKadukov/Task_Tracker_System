@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Админка</title>
     <link rel="stylesheet" type="text/css" href="/css/basic_style.css">
 </head>
 <header th:class="${darkDesign} ? 'darkhead' : 'head'">
     <nav th:class="${darkDesign} ? 'darkhead' : 'head'">
-        <a href="/task-tracker/" th:class="${darkDesign} ? 'darkhead' : 'head'">На главную</a>
+        <a href="/task-tracker/" th:class="${darkDesign} ? 'darkhead' : 'head'">Главная</a>
         <a href="/profile" th:class="${darkDesign} ? 'darkhead' : 'head'">Профиль</a>
         <a href="/about" th:class="${darkDesign} ? 'darkhead' : 'head'">О сайте</a>
         <a href="/task-tracker/logout" th:class="${darkDesign} ? 'darkhead' : 'head'">Выйти</a>
@@ -19,25 +20,25 @@
 <table th:class="${darkDesign} ? 'dark' : ''">
     <thead>
     <tr th:class="${darkDesign} ? 'dark' : ''">
-        <th th:class="${darkDesign} ? 'tdName dark' : 'tdName'"><a th:class="${darkDesign} ? 'dark' : ''">Имя</a></th>
-        <th th:class="${darkDesign} ? 'tdStatus dark' : 'tdStatus'"><a th:class="${darkDesign} ? 'dark' : ''">Статус</a></th>
-        <th th:class="${darkDesign} ? 'tdRole dark' : 'tdRole'"><a th:class="${darkDesign} ? 'dark' : ''">Роль</a></th>
-        <th th:class="${darkDesign} ? 'tdMail dark' : 'tdMail'"><a th:class="${darkDesign} ? 'dark' : ''">Почта</a></th>
-        <th th:class="${darkDesign} ? 'tdOper dark' : 'tdOper'">ОПЕРАЦИИ</th>
+        <th th:class="${darkDesign} ? 'tdName dark adaptivepadding' : 'tdName adaptivepadding'"><a th:class="${darkDesign} ? 'dark' : ''">Имя</a></th>
+        <th th:class="${darkDesign} ? 'tdStatus dark adaptivepadding' : 'tdStatus adaptivepadding'"><a th:class="${darkDesign} ? 'dark' : ''">Статус</a></th>
+        <th th:class="${darkDesign} ? 'tdRole dark adaptivepadding' : 'tdRole adaptivepadding'"><a th:class="${darkDesign} ? 'dark' : ''">Роль</a></th>
+        <th th:class="${darkDesign} ? 'tdMail dark adaptivepadding' : 'tdMail adaptivepadding'"><a th:class="${darkDesign} ? 'dark' : ''">Почта</a></th>
+        <th th:class="${darkDesign} ? 'tdOper4 dark adaptivepadding' : 'tdOper4 adaptivepadding'">ОПЕРАЦИИ</th>
     </tr>
     </thead>
     <tbody>
         <tr th:each="user : ${users}" >
-            <td th:text="${user.username}" class="tdName"></td>
-            <td th:if = "${user.enabled==true}" th:text="Активен" class="tdStatus"></td>
-            <td th:if = "${user.enabled==false}" th:text="Заблокирован" class="tdStatus"></td>
-            <td th:text="${user.role}" class="tdRole" style="text-align: center"></td>
-            <td th:text="${user.email}" class="tdMail" style="text-align: center;"></td>
-            <td class="tdOper2">
-                <a th:if = "${curUser.role == 'admin' && user.role=='subAdmin'}" th:href="@{changeRole/{username}(username=${user.username})}" class = "oper">Сделать User'ом</a>
-                <a th:if = "${curUser.role == 'admin' && user.role=='user'}" th:href="@{changeRole/{username}(username=${user.username})}" class = "oper">Сделать subAdmin'ом</a>
-                <a th:if = "${user.enabled==true}" th:href="@{blockUser/{username}(username=${user.username})}" class = "oper">Заблокировать</a>
-                <a th:if = "${user.enabled==false}" th:href="@{blockUser/{username}(username=${user.username})}" class = "oper">Разблокировать</a>
+            <td th:text="${user.username}" class="tdName adaptivelink"></td>
+            <td th:if = "${user.enabled==true}" th:text="Активен" class="tdStatus adaptivelink"></td>
+            <td th:if = "${user.enabled==false}" th:text="Заблокирован" class="tdStatus adaptivelink"></td>
+            <td th:text="${user.role}" class="tdRole adaptivelink" style="text-align: center"></td>
+            <td th:text="${user.email}" class="tdMail adaptivelink" style="text-align: center;"></td>
+            <td class="tdOper4 adaptivelink" style="text-align: center">
+                <a th:if = "${curUser.role == 'admin' && user.role=='subAdmin'}" th:href="@{changeRole/{username}(username=${user.username})}" class = "oper adaptivelink">Сделать User'ом</a>
+                <a th:if = "${curUser.role == 'admin' && user.role=='user'}" th:href="@{changeRole/{username}(username=${user.username})}" class = "oper adaptivelink">Сделать subAdmin'ом</a>
+                <a th:if = "${user.enabled==true}" th:href="@{blockUser/{username}(username=${user.username})}" class = "oper adaptivelink">Заблокировать</a>
+                <a th:if = "${user.enabled==false}" th:href="@{blockUser/{username}(username=${user.username})}" class = "oper adaptivelink">Разблокировать</a>
             </td>
         </tr>
     </tbody>

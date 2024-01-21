@@ -1,19 +1,20 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Изменения внесены</title>
     <link rel="stylesheet" type="text/css" href="/css/basic_style.css">
 </head>
 <header th:class="${darkDesign} ? 'darkhead' : 'head'">
     <nav th:class="${darkDesign} ? 'darkhead' : 'head'">
-        <a href="/task-tracker/" th:class="${darkDesign} ? 'darkhead' : 'head'">На главную</a>
+        <a href="/task-tracker/" th:class="${darkDesign} ? 'darkhead' : 'head'">Главная</a>
         <a href="/profile" th:class="${darkDesign} ? 'darkhead' : 'head'">Профиль</a>
         <a href="/about" th:class="${darkDesign} ? 'darkhead' : 'head'">О сайте</a>
         <a href="/task-tracker/logout" th:class="${darkDesign} ? 'darkhead' : 'head'">Выйти</a>
     </nav>
 </header>
 <body th:class="${darkDesign} ? 'dark-mode' : ''">
-<form action="/checkPassword" method="post" th:object="${curUser}" th:class="${darkDesign} ? 'dark' : ''" style="text-align: center">
+<form action="/checkPassword" method="post" th:object="${curUser}" th:class="${darkDesign} ? 'dark adaptform2' : 'adaptform2'" style="text-align: center">
     <span>Изменения внесены</span><br><br>
     <a class="oper" href="/profile" >КРУТО</a>
 </form>

@@ -2,27 +2,28 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Задача</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="/css/basic_style.css">
 </head>
 <header th:class="${darkDesign} ? 'darkhead' : 'head'">
     <nav th:class="${darkDesign} ? 'darkhead' : 'head'">
-        <a href="/task-tracker/" th:class="${darkDesign} ? 'darkhead' : 'head'">На главную</a>
+        <a href="/task-tracker/" th:class="${darkDesign} ? 'darkhead' : 'head'">Главная</a>
         <a href="/profile" th:class="${darkDesign} ? 'darkhead' : 'head'">Профиль</a>
         <a href="/about" th:class="${darkDesign} ? 'darkhead' : 'head'">О сайте</a>
         <a href="/task-tracker/logout" th:class="${darkDesign} ? 'darkhead' : 'head'">Выйти</a>
     </nav>
 </header>
 <body th:class="${darkDesign} ? 'dark-mode' : ''">
-<form action="/task-tracker/saveTask" method="post" th:object="${task}" th:class="${darkDesign} ? 'dark' : ''">
+<form action="/task-tracker/saveTask" method="post" th:object="${task}" th:class="${darkDesign} ? 'dark adaptform' : 'adaptform'">
     <input type="hidden" th:field="*{id}"/>
-    НАЗВАНИЕ <input type="text" th:field="*{title}"/><span th:if="${#fields.hasErrors('title')}" th:errors="*{title}" class="error-message"></span><br><br>
-    ОПИСАНИЕ <input type="text" th:field="*{description}"/><br><br>
-    ДЕДЛАЙН <input type="date" th:value="*{deadline}" id="deadline" name="deadline"/><span th:if="${#fields.hasErrors('deadline')}" th:errors="*{deadline}" class="error-message"></span><br><br>
-    <span th:if="${task.ref_task==0}">ПРИОРИТЕТ</span><input type="number" th:field="*{priority}" th:if="${task.ref_task==0}"/><span th:if="${#fields.hasErrors('priority') and task.ref_task==0}" th:errors="*{priority} " class="error-message"><br><br></span>
+    <b>НАЗВАНИЕ</b> <input type="text" th:field="*{title}"/><span th:if="${#fields.hasErrors('title')}" th:errors="*{title}" class="error-message"></span><br><br>
+    <b>ОПИСАНИЕ</b> <input type="text" th:field="*{description}"/><br><br>
+    <b>ДЕДЛАЙН</b> <input type="date" th:value="*{deadline}" id="deadline" name="deadline"/><span th:if="${#fields.hasErrors('deadline')}" th:errors="*{deadline}" class="error-message"></span><br><br>
+    <span th:if="${task.ref_task==0}"><b>ПРИОРИТЕТ</b></span><input type="number" th:field="*{priority}" th:if="${task.ref_task==0}"/><span th:if="${#fields.hasErrors('priority') and task.ref_task==0}" th:errors="*{priority} " class="error-message"><br><br></span>
     <input type="hidden" th:field="*{priority}" th:if="${task.ref_task!=0}"/>
     <input type="hidden" th:field="*{category}"/>
     <input type="hidden" th:field="*{ref_task}"/>
-    <input type="submit" value="СОХРАНИТЬ"/>
+    <input type="submit" value="СОХРАНИТЬ" class="marginsubmit"/>
 </form>
 </body>
 </html>

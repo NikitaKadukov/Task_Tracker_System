@@ -1,21 +1,22 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Профиль</title>
     <link rel="stylesheet" type="text/css" href="/css/basic_style.css">
 </head>
 <header th:class="${darkDesign} ? 'darkhead' : 'head'">
     <nav th:class="${darkDesign} ? 'darkhead' : 'head'">
-        <a href="/task-tracker/" th:class="${darkDesign} ? 'darkhead' : 'head'">На главную</a>
-        <a href="/profile" th:class="${darkDesign} ? 'darkhead' : 'head'">Профиль</a>
-        <a href="/about" th:class="${darkDesign} ? 'darkhead' : 'head'">О сайте</a>
-        <a href="/task-tracker/logout" th:class="${darkDesign} ? 'darkhead' : 'head'">Выйти</a>
+        <a href="/task-tracker/" th:class="${darkDesign} ? 'darkhead adaptiveheader' : 'head adaptiveheader'">Главная</a>
+        <a href="/profile" th:class="${darkDesign} ? 'darkhead adaptiveheader' : 'head adaptiveheader'">Профиль</a>
+        <a href="/about" th:class="${darkDesign} ? 'darkhead adaptiveheader' : 'head adaptiveheader'">О сайте</a>
+        <a href="/task-tracker/logout" th:class="${darkDesign} ? 'darkhead adaptiveheader' : 'head adaptiveheader'">Выйти</a>
     </nav>
 </header>
 <body th:class="${darkDesign} ? 'dark-mode' : ''">
 <div class="profile-container">
     <div class="profile-container">
-        <h1 style="text-align: center">Профиль</h1>
+        <h1 class = "adapth" style="text-align: center">Профиль</h1>
         <div class="profile-info">
             <div class="info-item">
                 <span class="info-label">Имя пользователя: </span>

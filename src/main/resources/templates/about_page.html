@@ -1,15 +1,16 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>О нас..</title>
     <link rel="stylesheet" type="text/css" href="/css/basic_style.css">
 </head>
 <header th:class="${darkDesign} ? 'darkhead' : 'head'">
     <nav th:class="${darkDesign} ? 'darkhead' : 'head'">
-        <a href="/task-tracker/" th:class="${darkDesign} ? 'darkhead' : 'head'">На главную</a>
-        <a href="/profile" th:class="${darkDesign} ? 'darkhead' : 'head'">Профиль</a>
-        <a href="/about" th:class="${darkDesign} ? 'darkhead' : 'head'">О сайте</a>
-        <a href="/task-tracker/logout" th:class="${darkDesign} ? 'darkhead' : 'head'">Выйти</a>
+        <a href="/task-tracker/" th:class="${darkDesign} ? 'darkhead adaptiveheader' : 'head adaptiveheader'">Главная</a>
+        <a href="/profile" th:class="${darkDesign} ? 'darkhead adaptiveheader' : 'head adaptiveheader'">Профиль</a>
+        <a href="/about" th:class="${darkDesign} ? 'darkhead adaptiveheader' : 'head adaptiveheader'">О сайте</a>
+        <a href="/task-tracker/logout" th:class="${darkDesign} ? 'darkhead adaptiveheader' : 'head adaptiveheader'">Выйти</a>
     </nav>
 </header>
 <body th:class="${darkDesign} ? 'dark-mode' : ''">
@@ -21,11 +22,11 @@
         <hr><p>Проект можно рассматривать не только как компонент резюме. Если Вам понравился функционал сайта, то вы вполне можете использовать его для личных или рабочих целей. Я буду очень этому рад.</p>
         <hr><p>Вы также можете отправлять обратную связь о сайте на адрес nikitaets2016@gmail.com. Буду рад вашим сообщениям!</p>
     </div>
-    <div>
+    <div class="hideblock">
     </div>
 </div>
 <div class="row">
-    <div>
+    <div class="hideblock">
     </div>
     <div class="block">
         <img src="/images/nikita.jpg" alt="Nikita">

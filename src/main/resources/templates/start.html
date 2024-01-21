@@ -5,10 +5,30 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="/css/basic_style.css">
+    <script>
+        function toggleRows(taskId) {
+            var rows = document.querySelectorAll('.toggle-row');
+
+            // Проходим по всем строкам и добавляем/удаляем класс "hide" на основе атрибута data-task-id
+            rows.forEach(function(row) {
+                var rowTaskId = row.getAttribute('data-task-id');
+                if (rowTaskId === taskId) {
+                    row.classList.toggle("hide");
+                }
+            });
+        }
+
+        function toggleTable() {
+            var rows = document.querySelectorAll('.ad2');
+            rows.forEach(function(row) {
+                row.classList.toggle("hide2");
+            });
+        }
+    </script>
 </head>
 <header th:class="${darkDesign} ? 'darkhead' : 'head'">
     <nav th:class="${darkDesign} ? 'darkhead' : 'head'">
-        <a href="/task-tracker/" th:class="${darkDesign} ? 'darkhead' : 'head'">На главную</a>
+        <a href="/task-tracker/" th:class="${darkDesign} ? 'darkhead' : 'head'">Главная</a>
         <a href="/profile" th:class="${darkDesign} ? 'darkhead' : 'head'">Профиль</a>
         <a href="/about" th:class="${darkDesign} ? 'darkhead' : 'head'">О сайте</a>
         <a href="/task-tracker/logout" th:class="${darkDesign} ? 'darkhead' : 'head'">Выйти</a>
@@ -16,19 +36,21 @@
 </header>
 <body th:class="${darkDesign} ? 'dark-mode' : ''">
 <h1 class="to_do_list">
-    <span th:class="${darkDesign} ? 'title-left-dark' : 'title-left'">Список дел</span>
-    <span th:class="${darkDesign} ? 'title-right-dark' : 'title-right'">Пользователь: <span th:class="${darkDesign} ? 'title-right-dark' : 'title-right'" th:text=" ${username}"></span></span>
+    <span class="title-left"></span>
+    <span class="title-right">Пользователь: <span class="title-right">adminostasiya</span></span>
 </h1>
-<table>
+<h1 class="to_do_list">
+    <span class="title-left adaptiveh">Список дел</span></h1>
+<table class = "adaptivetable">
     <thead>
     <tr th:class="${darkDesign} ? 'dark' : ''">
-        <th th:class="${darkDesign} ? 'tdStat dark' : 'tdStat'"><h2></h2></th>
-        <th th:class="${darkDesign} ? 'tdAdd dark' : 'tdAdd'"><h2></h2></th>
-        <th th:class="${darkDesign} ? 'tdTit dark' : 'tdTit'"><a href="/sorting/sortTasks/title" th:class="${darkDesign} ? 'dark' : ''">НАЗВАНИЕ</a></th>
-        <th th:class="${darkDesign} ? 'tdDesc dark' : 'tdDesc'"><a href="/sorting/sortTasks/description" th:class="${darkDesign} ? 'dark' : ''">ОПИСАНИЕ</a></th>
-        <th th:class="${darkDesign} ? 'tdDead dark' : 'tdDead'"><a href="/sorting/sortTasks/deadline" th:class="${darkDesign} ? 'dark' : ''">ДЭДЛАЙН</a></th>
-        <th th:class="${darkDesign} ? 'tdPrior dark' : 'tdPrior'"><a href="/sorting/sortTasks/priority" th:class="${darkDesign} ? 'dark' : ''">ПРИОРИТЕТ</a></th>
-        <th th:class="${darkDesign} ? 'tdOper dark' : 'tdOper'">ОПЕРАЦИИ</th>
+        <th th:class="${darkDesign} ? 'tdStat dark adaptivepadding' : 'tdStat adaptivepadding'"><h2></h2></th>
+        <th th:class="${darkDesign} ? 'tdAdd dark adaptivepadding' : 'tdAdd adaptivepadding'"><h2></h2></th>
+        <th th:class="${darkDesign} ? 'tdTit dark adaptivepadding' : 'tdTit adaptivepadding'"><a href="/sorting/sortTasks/title" th:class="${darkDesign} ? 'dark' : ''">НАЗВАНИЕ</a></th>
+        <th th:class="${darkDesign} ? 'tdDesc dark adaptivepadding' : 'tdDesc adaptivepadding'"><a href="/sorting/sortTasks/description" th:class="${darkDesign} ? 'dark' : ''">ОПИСАНИЕ</a></th>
+        <th th:class="${darkDesign} ? 'tdDead dark adaptivepadding' : 'tdDead adaptivepadding'"><a href="/sorting/sortTasks/deadline" th:class="${darkDesign} ? 'dark' : ''">ДЭДЛАЙН</a></th>
+        <th th:class="${darkDesign} ? 'tdPrior dark adaptivepadding' : 'tdPrior adaptivepadding'"><a href="/sorting/sortTasks/priority" th:class="${darkDesign} ? 'dark' : ''">ПРИОР.</a></th>
+        <th th:class="${darkDesign} ? 'tdOper dark adaptivepadding' : 'tdOper adaptivepadding'">ОПЕРАЦИИ</th>
     </tr>
     </thead>
     <script>
@@ -41,71 +63,72 @@
         }
     </script>
     <tbody>
-    <table th:each="task : ${tasks}" th:if="${not task.is_done}" th:class="${darkDesign} ? 'dark' : ''">
+    <table th:each="task : ${tasks}" th:if="${not task.is_done}" th:class="${darkDesign} ? 'dark adaptivetable' : 'adaptivetable'">
     <tr
         th:class="${#temporals.format(task.deadline, 'yyyy-MM-dd') lt #temporals.format(#temporals.createNow(), 'yyyy-MM-dd')} ? 'overdue': ''"
         th:classappend="${#temporals.format(task.deadline.minusDays(2), 'yyyy-MM-dd') lt #temporals.format(#temporals.createNow(), 'yyyy-MM-dd')} ? 'ending-soon': ''">
-        <td class="tdStat"><a class="oper" th:href="@{markTask/{id}(id=${task.id})}" >Выполнено</a></td>
-        <td class="tdAdd"><a class="oper" th:href="@{addRefTask/{id}(id=${task.id})}" >Подзадание</a></td>
-        <td th:text="${task.title}" class="tdTit"></td>
-        <td th:text="${task.description}" class="tdDesc"></td>
-        <td th:text="${task.deadline}" class="tdDead" style="text-align: center"></td>
-        <td th:text="${task.priority}" class="tdPrior" style="text-align: center; font-size: 20pt;"></td>
-        <td class="tdOper">
-            <a th:href="@{updateTask/{id}(id=${task.id})}" class = "oper">Изменить</a>
-            <a href="#" class="oper" th:onclick="'confirmDelete(' + ${task.id} + ')'" >Удалить</a>
+        <td class="tdStat"><div class = "pk-only"><a class="oper adaptivelink pk-only" th:href="@{markTask/{id}(id=${task.id})}" >Выполнено</a></div><div class="mobile-only"><a class="oper adaptivelink mobile-only" th:href="@{markTask/{id}(id=${task.id})}">OK</a></div></td>
+        <td class="tdAdd"><div class = "pk-only"><a class="oper adaptivelink pk-only" th:href="@{addRefTask/{id}(id=${task.id})}" >Подзадание</a><button class="pk-only adbut" th:onclick="'toggleRows(\'' + ${task.id} + '\')'"><img src="/images/eye.png"></button></div><div class="mobile-only"><a class="oper adaptivelink mobile-only" th:href="@{addRefTask/{id}(id=${task.id})}" >+</a><button class="mobile-only adbut" th:onclick="'toggleRows(\'' + ${task.id} + '\')'"><img src="/images/eye.png"></button></div></td>
+        <td th:text="${task.title}" class="tdTit adaptivelink"></td>
+        <td th:text="${task.description}" class="tdDesc adaptivelink"></td>
+        <td th:text="${task.deadline}" class="tdDead adaptivelink" style="text-align: center"></td>
+        <td th:text="${task.priority}" class="tdPrior adaptivelink adaptiveprior" style="text-align: center;"></td>
+        <td class="tdOper adaptivelink">
+            <a th:href="@{updateTask/{id}(id=${task.id})}" class = "oper adaptivelink" style="margin-left: 12%; margin-bottom: 3px;">Изменить</a><br>
+            <a href="#" class="oper adaptivelink" th:onclick="'confirmDelete(' + ${task.id} + ')'" style="margin-left: 16%">Удалить</a>
         </td>
 </tr>
         <tr th:each="subTask : ${subTasks}" th:if="${subTask.ref_task == task.id}"
-            th:class="${#temporals.format(subTask.deadline.minusDays(2), 'yyyy-MM-dd') lt #temporals.format(#temporals.createNow(), 'yyyy-MM-dd')} ? 'ending-soon-subtask': ''"
-            th:classappend="${subTask.is_done} ? 'completed-subtask': ''">
-            <td></td>
-                <td style="text-align: right"><a class="oper" th:href="@{markTask/{id}(id=${subTask.id})}" >OK</a></td>
-                <td th:text="${subTask.title}"></td>
-                <td th:text="${subTask.description}"></td>
-                <td colspan="2" th:text="${subTask.deadline}" style="text-align: center"></td>
-                <td>
-                    <a th:href="@{updateTask/{id}(id=${subTask.id})}" class = "oper" >Изменить</a>
-                    <a href="#" class="oper" th:onclick="'confirmDelete(' + ${subTask.id} + ')'">Удалить</a>
+            th:class="${#temporals.format(subTask.deadline.minusDays(2), 'yyyy-MM-dd') lt #temporals.format(#temporals.createNow(), 'yyyy-MM-dd')} ? 'ending-soon-subtask toggle-row': 'toggle-row'"
+            th:classappend="${subTask.is_done} ? 'completed-subtask': ''" th:data-task-id="${task.id}">
+                <td colspan="2" style="text-align: center" class="adaptivesub tdStatAdd adaptivelink"><a class="oper adaptivelink" th:href="@{markTask/{id}(id=${subTask.id})}" >OK</a></td>
+                <td th:text="${subTask.title}" class="adaptivesub tdTit adaptivelink"></td>
+                <td th:text="${subTask.description}" class="adaptivesub tdDesc adaptivelink"></td>
+                <td colspan="2" th:text="${subTask.deadline}" style="text-align: center" class="adaptivesub tdDeadPrior adaptivelink"></td>
+                <td class="adaptivesub tdOper adaptivelink">
+                    <a th:href="@{updateTask/{id}(id=${subTask.id})}" class = "oper adaptivelink" style="margin-left: 12%; margin-bottom: 3px;">Изменить</a><br>
+                    <a href="#" class="oper adaptivelink" th:onclick="'confirmDelete(' + ${subTask.id} + ')'" style="margin-left: 16%;">Удалить</a>
                 </td>
             </tr>
         </table>
+
     </tbody>
 </table>
-<br><div class="button-container"><input type="button" class = "addButton" value="Добавить задание" onclick="window.location.href = 'addNewTask'"/></div>
-<h1 class="to_do_list">
+<br><div class="button-container"><input type="button" class = "addButton adaptivebutton" value="Добавить задание" onclick="window.location.href = 'addNewTask'"/></div>
+<br><br><h1 class="to_do_list adaptiveh">
     <span th:class="${darkDesign} ? 'title-left-dark' : 'title-left'">Выполненные задачи:</span>
 </h1>
-<table>
+<div style="text-align: center"><button class="adbut2" th:onclick="'toggleTable()'"><p style="font-style: italic; text-decoration: underline;">Развернуть/свернуть</p></button></div>
+<table class="adaptivetable">
     <thead>
-    <tr th:class="${darkDesign} ? 'dark' : ''">
-        <th th:class="${darkDesign} ? 'tdPrior dark' : 'tdStat'"><h2></h2></th>
-        <th th:class="${darkDesign} ? 'tdTit dark' : 'tdTit'"><a th:class="${darkDesign} ? 'dark' : ''" href="/sorting/sortTasks/title">НАЗВАНИЕ</a></th>
-        <th th:class="${darkDesign} ? 'tdDesc dark' : 'tdDesc'"><a th:class="${darkDesign} ? 'dark' : ''" href="/sorting/sortTasks/description">ОПИСАНИЕ</a></th>
-        <th th:class="${darkDesign} ? 'tdDead dark' : 'tdDead'"><a th:class="${darkDesign} ? 'dark' : ''" href="/sorting/sortTasks/deadline">ДЭДЛАЙН</a></th>
-        <th th:class="${darkDesign} ? 'tdPrior dark' : 'tdPrior'"><a th:class="${darkDesign} ? 'dark' : ''" href="/sorting/sortTasks/priority">ПРИОРИТЕТ</a></th>
-        <th th:class="${darkDesign} ? 'tdOper dark' : 'tdOper'">Операции</th>
+    <tr th:class="${darkDesign} ? 'dark ad2' : 'ad2'">
+        <th th:class="${darkDesign} ? 'tdStat2 dark adaptivepadding' : 'tdStat2 adaptivepadding'"><h2></h2></th>
+        <th th:class="${darkDesign} ? 'tdTit dark adaptivepadding' : 'tdTit adaptivepadding'"><a th:class="${darkDesign} ? 'dark' : ''" href="/sorting/sortTasks/title">НАЗВАНИЕ</a></th>
+        <th th:class="${darkDesign} ? 'tdDesc dark adaptivepadding' : 'tdDesc adaptivepadding'"><a th:class="${darkDesign} ? 'dark' : ''" href="/sorting/sortTasks/description">ОПИСАНИЕ</a></th>
+        <th th:class="${darkDesign} ? 'tdDead dark adaptivepadding' : 'tdDead adaptivepadding'"><a th:class="${darkDesign} ? 'dark' : ''" href="/sorting/sortTasks/deadline">ДЭДЛАЙН</a></th>
+        <th th:class="${darkDesign} ? 'tdPrior dark adaptivepadding' : 'tdPrior adaptivepadding'"><a th:class="${darkDesign} ? 'dark' : ''" href="/sorting/sortTasks/priority">ПРИОРИТЕТ</a></th>
+        <th th:class="${darkDesign} ? 'tdOper3 dark adaptivepadding' : 'tdOper3 adaptivepadding'">ОПЕРАЦИИ</th>
     </tr>
     </thead>
     <tbody>
-    <table th:each="task : ${tasks}" th:if="${task.is_done}" th:class="${darkDesign} ? 'dark' : ''">
-    <tr th:class="${darkDesign} ? 'completed-task dark' : 'completed-task'">
-        <td class="tdStat"><a class="oper" th:href="@{markTask/{id}(id=${task.id})}" >Вернуть</a></td>
-        <td th:text="${task.title}" class="tdTit"></td>
-        <td th:text="${task.description}" class="tdDesc"></td>
-        <td th:text="${task.deadline}" class="tdDead" style="text-align: center"></td>
-        <td th:text="${task.priority}" class="tdPrior" style="text-align: center; font-size: 20pt;"></td>
-        <td class = "tdOper">
-            <a href="#" class="oper" th:onclick="'confirmDelete(' + ${task.id} + ')'" >Удалить</a>
+    <table th:each="task : ${tasks}" th:if="${task.is_done}" th:class="${darkDesign} ? 'dark adaptivetable' : 'adaptivetable'">
+    <tr th:class="${darkDesign} ? 'completed-task dark ad2' : 'completed-task ad2'">
+        <td class="tdStat2"><a class="oper adaptivelink" th:href="@{markTask/{id}(id=${task.id})}" style="margin-right: 3px">Вернуть</a><button style="margin-right: 3px" class="adbut2" th:onclick="'toggleRows(\'' + ${task.id} + '\')'"><img src="/images/eye.png"></button></td>
+        <td th:text="${task.title}" class="tdTit adaptivelink"></td>
+        <td th:text="${task.description}" class="tdDesc adaptivelink"></td>
+        <td th:text="${task.deadline}" class="tdDead adaptivelink" style="text-align: center"></td>
+        <td th:text="${task.priority}" class="tdPrior adaptiveprior adaptivelink" style="text-align: center"></td>
+        <td class = "tdOper3 adaptivelink">
+            <a href="#" class="oper adaptivelink" th:onclick="'confirmDelete(' + ${task.id} + ')'" >Удалить</a>
         </td>
     </tr>
-        <tr th:each="subTask : ${subTasks}" th:if="${subTask.ref_task == task.id}" class="completed-subtask">
-            <td></td>
-            <td th:text="${subTask.title}"></td>
-            <td th:text="${subTask.description}"></td>
-            <td th:text="${subTask.deadline}" colspan="2" style="text-align: center"></td>
-            <td>
-                <a href="#" class="oper" th:onclick="'confirmDelete(' + ${subTask.id} + ')'" >Удалить</a>
+        <tr th:each="subTask : ${subTasks}" th:if="${subTask.ref_task == task.id}" class="completed-subtask toggle-row ad2" th:data-task-id="${task.id}">
+            <td class="adaptivesub tdStat2 adaptivelink"></td>
+            <td th:text="${subTask.title}" class="adaptivesub tdTit adaptivelink"></td>
+            <td th:text="${subTask.description}" class="adaptivesub tdDesc adaptivelink"></td>
+            <td th:text="${subTask.deadline}" colspan="2" style="text-align: center" class="adaptivesub tdDeadPrior adaptivelink"></td>
+            <td class="adaptivesub tdOper3 adaptivelink">
+                <a href="#" class="oper adaptivelink" th:onclick="'confirmDelete(' + ${subTask.id} + ')'" >Удалить</a>
             </td>
         </tr>
     </table>
