@@ -8,7 +8,7 @@
 <body>
 <div class="container">
     <h2>РЕГИСТРАЦИЯ</h2>
-    <form action="/saveUser" method="post" style="padding: 20px; margin-top: 20px" th:object="${user}">
+    <form action="/saveUser" method="post" th:object="${user}" class="adaptive_form">
         Логин: <br><input class="form-input" type="text" th:field="*{username}" />
         <span th:if="${#fields.hasErrors('username')}" th:errors="*{username}" class="error-message"></span><br>
         Пароль: <br><input class="form-input" type="password" th:field="*{password}" />

@@ -11,6 +11,9 @@
     }
 
     /********************Классы********************/
+
+    .adaptive{}
+    .adaptive_form{}
     .container {
         text-align: center;
         background-color: #fff;
@@ -170,6 +173,11 @@
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     }
 
+    .container.adaptive{
+        margin-top: 33%;
+        padding-top: 50px;
+    }
+
     .button {
         display: inline-block;
         padding: 10px 20px;
@@ -240,6 +248,10 @@
         transition: background-color 0.3s ease;
     }
 
+    .button2.adaptive{
+        padding: 16px 65px;
+    }
+
     .error-message {
         color: red;
         font-size: 14px;
@@ -255,6 +267,15 @@
     .comfort {
         font-size: 16px;
         color: #666;
+    }
+
+    .comfort.adaptive{
+        margin-top: 20px;
+    }
+
+    .adaptive_form{
+        padding: 20px;
+        margin-top: 20px;
     }
 
     /********************Формы********************/
