@@ -1,12 +1,10 @@
 package com.kadukov.spring.project.spring_project.entity;
 
+import com.kadukov.spring.project.spring_project.validation.YearRange;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.*;
 
 import java.time.LocalDate;
 import java.util.Comparator;
@@ -19,13 +17,15 @@ public class Task{
     @Column
     private Integer id;
     @Column
-    @Size(min = 2, message = "Название должно состоять хотя бы из 2 символов")
+    @Size(min = 2, max = 30, message = "Название должно состоять из 2-30 символов")
     @NotBlank
     private String title;
     @Column
+    @Size(max = 200, message = "Описание не должно состоять более чем из 200 символов")
     private String description;
     @Column
     @Min(value = 0, message = "Приоритет не должен быть меньше 0")
+    @Max(value = 100, message = "Приоритет не должен быть больше 100")
     @NotNull(message = "Пропишите приоритет")
     private Integer priority;
     @Column
@@ -33,7 +33,8 @@ public class Task{
     @Column
     private String owner;
     @Column
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @YearRange
+    @DateTimeFormat(pattern = "yyyy-MM-dd", fallbackPatterns = {"yyyy-MM-dd", "yyyyy-MM-dd","yyyyyy-MM-dd"})
     @NotNull(message = "Пропишите дату")
     private LocalDate deadline;
 

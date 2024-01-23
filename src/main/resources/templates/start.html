@@ -71,7 +71,7 @@
         <td class="tdAdd"><div class = "pk-only"><a class="oper adaptivelink pk-only" th:href="@{addRefTask/{id}(id=${task.id})}" >Подзадание</a><button class="pk-only adbut" th:onclick="'toggleRows(\'' + ${task.id} + '\')'"><img src="/images/eye.png"></button></div><div class="mobile-only"><a class="oper adaptivelink mobile-only" th:href="@{addRefTask/{id}(id=${task.id})}" >+</a><button class="mobile-only adbut" th:onclick="'toggleRows(\'' + ${task.id} + '\')'"><img src="/images/eye.png"></button></div></td>
         <td th:text="${task.title}" class="tdTit adaptivelink"></td>
         <td th:text="${task.description}" class="tdDesc adaptivelink"></td>
-        <td th:text="${task.deadline}" class="tdDead adaptivelink" style="text-align: center"></td>
+        <td th:text="${#temporals.format(task.deadline, 'dd.MM.yyyy')}" class="tdDead adaptivelink" style="text-align: center"></td>
         <td th:text="${task.priority}" class="tdPrior adaptivelink adaptiveprior" style="text-align: center;"></td>
         <td class="tdOper adaptivelink">
             <a th:href="@{updateTask/{id}(id=${task.id})}" class = "oper adaptivelink" style="margin-left: 12%; margin-bottom: 3px;">Изменить</a><br>
@@ -84,7 +84,7 @@
                 <td colspan="2" style="text-align: center" class="adaptivesub tdStatAdd adaptivelink"><a class="oper adaptivelink" th:href="@{markTask/{id}(id=${subTask.id})}" >OK</a></td>
                 <td th:text="${subTask.title}" class="adaptivesub tdTit adaptivelink"></td>
                 <td th:text="${subTask.description}" class="adaptivesub tdDesc adaptivelink"></td>
-                <td colspan="2" th:text="${subTask.deadline}" style="text-align: center" class="adaptivesub tdDeadPrior adaptivelink"></td>
+                <td colspan="2" th:text="${#temporals.format(subTask.deadline, 'dd.MM.yyyy')}" style="text-align: center" class="adaptivesub tdDeadPrior adaptivelink"></td>
                 <td class="adaptivesub tdOper adaptivelink">
                     <a th:href="@{updateTask/{id}(id=${subTask.id})}" class = "oper adaptivelink" style="margin-left: 12%; margin-bottom: 3px;">Изменить</a><br>
                     <a href="#" class="oper adaptivelink" th:onclick="'confirmDelete(' + ${subTask.id} + ')'" style="margin-left: 16%;">Удалить</a>
@@ -116,7 +116,7 @@
         <td class="tdStat2"><a class="oper adaptivelink" th:href="@{markTask/{id}(id=${task.id})}" style="margin-right: 3px">Вернуть</a><button style="margin-right: 3px" class="adbut2" th:onclick="'toggleRows(\'' + ${task.id} + '\')'"><img src="/images/eye.png"></button></td>
         <td th:text="${task.title}" class="tdTit adaptivelink"></td>
         <td th:text="${task.description}" class="tdDesc adaptivelink"></td>
-        <td th:text="${task.deadline}" class="tdDead adaptivelink" style="text-align: center"></td>
+        <td th:text="${#temporals.format(task.deadline, 'dd.MM.yyyy')}" class="tdDead adaptivelink" style="text-align: center"></td>
         <td th:text="${task.priority}" class="tdPrior adaptiveprior adaptivelink" style="text-align: center"></td>
         <td class = "tdOper3 adaptivelink">
             <a href="#" class="oper adaptivelink" th:onclick="'confirmDelete(' + ${task.id} + ')'" >Удалить</a>
@@ -126,7 +126,7 @@
             <td class="adaptivesub tdStat2 adaptivelink"></td>
             <td th:text="${subTask.title}" class="adaptivesub tdTit adaptivelink"></td>
             <td th:text="${subTask.description}" class="adaptivesub tdDesc adaptivelink"></td>
-            <td th:text="${subTask.deadline}" colspan="2" style="text-align: center" class="adaptivesub tdDeadPrior adaptivelink"></td>
+            <td th:text="${#temporals.format(subTask.deadline, 'dd.MM.yyyy')}" colspan="2" style="text-align: center" class="adaptivesub tdDeadPrior adaptivelink"></td>
             <td class="adaptivesub tdOper3 adaptivelink">
                 <a href="#" class="oper adaptivelink" th:onclick="'confirmDelete(' + ${subTask.id} + ')'" >Удалить</a>
             </td>

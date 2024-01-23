@@ -16,10 +16,10 @@
 <body th:class="${darkDesign} ? 'dark-mode' : ''">
 <form action="/task-tracker/saveTask" method="post" th:object="${task}" th:class="${darkDesign} ? 'dark adaptform' : 'adaptform'">
     <input type="hidden" th:field="*{id}"/>
-    <b>НАЗВАНИЕ</b> <input type="text" th:field="*{title}"/><span th:if="${#fields.hasErrors('title')}" th:errors="*{title}" class="error-message"></span><br><br>
-    <b>ОПИСАНИЕ</b> <input type="text" th:field="*{description}"/><br><br>
-    <b>ДЕДЛАЙН</b> <input type="date" th:value="*{deadline}" id="deadline" name="deadline"/><span th:if="${#fields.hasErrors('deadline')}" th:errors="*{deadline}" class="error-message"></span><br><br>
-    <span th:if="${task.ref_task==0}"><b>ПРИОРИТЕТ</b></span><input type="number" th:field="*{priority}" th:if="${task.ref_task==0}"/><span th:if="${#fields.hasErrors('priority') and task.ref_task==0}" th:errors="*{priority} " class="error-message"><br><br></span>
+    <b>НАЗВАНИЕ</b> <input type="text" th:field="*{title}"/><br><div style="text-align: center; margin-bottom: 2%;"><span th:if="${#fields.hasErrors('title')}" th:errors="*{title}" class="error-message"></span></div><br>
+    <b>ОПИСАНИЕ</b> <input type="text" th:field="*{description}"/><br><div style="text-align: center; margin-bottom: 2%;"><span th:if="${#fields.hasErrors('description')}" th:errors="*{description}" class="error-message"></span></div><br>
+    <b>ДЕДЛАЙН</b> <input type="date" th:value="*{deadline}" id="deadline" name="deadline"/><br><div style="text-align: center; margin-bottom: 2%;"><span th:if="${#fields.hasErrors('deadline')}" th:errors="*{deadline}" class="error-message"></span></div><br>
+    <span th:if="${task.ref_task==0}"><b>ПРИОРИТЕТ</b></span><input type="number" oninput="javascript: if (this.value.length > 3) this.value = this.value.slice(0, 3);" th:field="*{priority}" th:if="${task.ref_task==0}"/><br><div style="text-align: center; margin-bottom: 2%;"><span th:if="${#fields.hasErrors('priority') and task.ref_task==0}" th:errors="*{priority} " class="error-message"></span></div>
     <input type="hidden" th:field="*{priority}" th:if="${task.ref_task!=0}"/>
     <input type="hidden" th:field="*{category}"/>
     <input type="hidden" th:field="*{ref_task}"/>
