@@ -2,21 +2,25 @@ package com.kadukov.spring.project.spring_project.entity;
 
 import javax.persistence.*;
 import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "users")
 public class User {
     @Id
     @Column
-    @Pattern(regexp = "\\w{3,}", message = "Минимум 3 символа (буквы, цифры)")
+    @Pattern(regexp = "\\w{3,}", message = "Минимум 3 символа (латинские буквы, цифры) без пробелов")
+    @Size(max = 15, message = "Не больше 15 символов")
     private String username;
     @Column
-    @Pattern(regexp = ".{6,}", message = "Минимум 6 символов (буквы, цифры)")
+    @Pattern(regexp = "\\w{6,}", message = "Минимум 6 символов (латинские буквы, цифры) без пробелов")
+    @Size(max = 15, message = "Не больше 15 символов")
     private String password;
     @Column
     private boolean enabled;
     @Column
     @Pattern(regexp = "\\w+@\\w+\\.\\w+", message = "Введите корректную почту")
+    @Size(max = 25, message = "Не больше 25 символов")
     private String email;
     @Column
     private String role;

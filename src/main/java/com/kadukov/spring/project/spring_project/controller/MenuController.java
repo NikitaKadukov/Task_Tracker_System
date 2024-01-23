@@ -11,6 +11,9 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 @Controller
 public class MenuController {
 
@@ -58,7 +61,7 @@ public class MenuController {
     }
 
     @RequestMapping("/login")
-    public String login(@ModelAttribute("task") User user, HttpSession session){
+    public String login(@ModelAttribute("task") User user, HttpSession session, Model model){
         if(userService.valid(user)){
             User curUser = userService.getUser(user.getUsername());
             session.setAttribute("user", curUser);
@@ -69,13 +72,21 @@ public class MenuController {
             return "redirect:/task-tracker/";
         }
         else{
-            return "redirect:/";
+            model.addAttribute("errorUser", true);
+            return "signIN";
         }
     }
 
     @RequestMapping(value = "/sendEmail", method = RequestMethod.POST)
     public String sendEmail(@RequestParam String email, Model model){
         User user = userService.whichEmail(email);
+        String regex = "\\w+@\\w+\\.\\w+";
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher= pattern.matcher(email);
+        if(!matcher.matches()){
+            model.addAttribute("errorEmail", true);
+            return "forgotPasswordView";
+        }
         if(user == null){
             model.addAttribute("info", "Такая почта не зарегистрирована" +
                     " на сайте!");
