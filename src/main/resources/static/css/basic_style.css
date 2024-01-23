@@ -336,58 +336,108 @@
     }
 
     .tdStat {
-        width: 12%;
+        width: 7%;
+        word-wrap: break-word;
+        word-break: break-all;
     }
 
     .tdStat2 {
-        width: 14%;
+        width: 17%;
+        word-wrap: break-word;
+        word-break: break-all;
+    }
+    td.tdStat2{
+        text-align: center;
     }
 
     .tdAdd {
-        width: 13%;
+        width: 7%;
+        word-wrap: break-word;
+        word-break: break-all;
     }
 
     .tdTit {
-        width: 15%;
+        width: 14%;
+        word-wrap: break-word;
+        word-break: break-all;
     }
 
     .tdDesc {
-        width: 27%;
+        width: 25%;
+        word-wrap: break-word;
+        word-break: break-all;
     }
 
     .tdDead {
-        width: 13%;
+        width: 18%;
+        word-wrap: break-word;
+        word-break: break-all;
     }
 
     .tdPrior {
-        width: 9%;
+        width: 11%;
+        word-wrap: break-word;
+        word-break: break-all;
     }
 
     .tdOper {
-        width: 11%;
+        width: 18%;
+        word-wrap: break-word;
+        word-break: break-all;
     }
 
     .tdOper2 {
         width: 24%;
+        word-wrap: break-word;
+        word-break: break-all;
     }
+
     .tdOper3 {
         width: 15%;
+        word-wrap: break-word;
+        word-break: break-all;
+    }
+
+    .tdOper4 {
+        width: 30%;
+        word-wrap: break-word;
+        word-break: break-all;
     }
 
     .tdName {
-        width: 15%;
+        width: 18%;
+        word-wrap: break-word;
+        word-break: break-all;
     }
 
     .tdStatus {
-        width: 12%;
+        width: 13%;
+        word-wrap: break-word;
+        word-break: break-all;
     }
 
     .tdRole {
-        width: 12%;
+        width: 13%;
+        word-wrap: break-word;
+        word-break: break-all;
     }
 
     .tdMail {
-        width: 12%;
+        width: 26%;
+        word-wrap: break-word;
+        word-break: break-all;
+    }
+
+    .tdDeadPrior{
+        width: 29%;
+        word-wrap: break-word;
+        word-break: break-all;
+    }
+
+    .tdStatAdd{
+        width: 14%;
+        word-wrap: break-word;
+        word-break: break-all;
     }
 
     .button-container {
@@ -609,6 +659,7 @@
         margin-bottom: 3px;
         display: block;
     }
+
     button.mobile-only{
         padding: 0px;
         margin: 0px;
@@ -617,22 +668,17 @@
     td.adaptiveprior{
         font-size: 20pt;
     }
-    .hide {
-        display: none;
-    }
+
     .pk-only.adbut img{
         width: 15px;
     }
     .adbut2 img{
-        width: 15px;
+        width: 20px;
     }
     .pk-only.adbut{
         background-color: inherit;
         border: 1px solid #3498db;
-    }
-    .adbut2{
-        background-color: inherit;
-        border: 1px solid #3498db;
+        margin-left: 30%;
     }
     div.pk-only{
         text-align: center;
@@ -644,7 +690,54 @@
         display: table-row;
     }
     .marginsubmit{
-        margin-left: 40%;
+        margin-left: 35%;
+    }
+    .adaptpklink{
+        padding: 8px 60px;
+    }
+    .adbut2{
+        margin-bottom: 1%;
+        background-color: inherit;
+        border: 1px solid #3498db;
+    }
+    .adbut2 p{
+        margin: 15px;
+    }
+    .hide {
+        display: none;
+    }
+    .adaptlnkpk{
+        margin-left: 25%;
+    }
+    a.pkopadapt{
+        color: black;
+        border: 1px solid black;
+    }
+
+    body.dark-mode h1 span.title-right{
+        color: #aec6cc;
+    }
+    body.dark-mode button.adbut{
+        border: 1px solid black;
+    }
+    body.dark-mode button.adbut2{
+        color: #aec6cc;
+        border: 1px solid #aec6cc;
+    }
+    body.dark-mode tr.overdue{
+        color: #fff;
+    }
+
+    body.dark-mode tr.overdue a.oper{
+        color: #fff;
+        border: 1px solid #fff;
+    }
+
+    body.dark-mode tr.overdue button.adbut{
+        border: 1px solid #fff;
+    }
+    body.dark-mode tr.overdue button.adbut2{
+        border: 1px solid #fff;
     }
 }
 
@@ -1483,7 +1576,7 @@
     }
     body.dark-mode button.adbut2{
         color: #aec6cc;
-        border: 1px solid black;
+        border: 1px solid #aec6cc;
     }
     body.dark-mode tr.overdue{
         color: #fff;

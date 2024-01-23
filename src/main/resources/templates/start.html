@@ -74,20 +74,20 @@
         <td th:text="${#temporals.format(task.deadline, 'dd.MM.yyyy')}" class="tdDead adaptivelink" style="text-align: center"></td>
         <td th:text="${task.priority}" class="tdPrior adaptivelink adaptiveprior" style="text-align: center;"></td>
         <td class="tdOper adaptivelink">
-            <a th:href="@{updateTask/{id}(id=${task.id})}" class = "oper adaptivelink" style="margin-left: 12%; margin-bottom: 3px;">Изменить</a><br>
-            <a href="#" class="oper adaptivelink" th:onclick="'confirmDelete(' + ${task.id} + ')'" style="margin-left: 16%">Удалить</a>
+            <a th:href="@{updateTask/{id}(id=${task.id})}" class = "oper adaptivelink" style="margin-left: 10%; margin-bottom: 3px;">Изменить</a><br>
+            <a href="#" class="oper adaptivelink" th:onclick="'confirmDelete(' + ${task.id} + ')'" style="margin-left: 14%">Удалить</a>
         </td>
 </tr>
         <tr th:each="subTask : ${subTasks}" th:if="${subTask.ref_task == task.id}"
             th:class="${#temporals.format(subTask.deadline.minusDays(2), 'yyyy-MM-dd') lt #temporals.format(#temporals.createNow(), 'yyyy-MM-dd')} ? 'ending-soon-subtask toggle-row': 'toggle-row'"
             th:classappend="${subTask.is_done} ? 'completed-subtask': ''" th:data-task-id="${task.id}">
-                <td colspan="2" style="text-align: center" class="adaptivesub tdStatAdd adaptivelink"><a class="oper adaptivelink" th:href="@{markTask/{id}(id=${subTask.id})}" >OK</a></td>
+                <td colspan="2" style="text-align: center" class="adaptivesub tdStatAdd adaptivelink"><a class="oper adaptivelink adaptpklink" th:href="@{markTask/{id}(id=${subTask.id})}" >OK</a></td>
                 <td th:text="${subTask.title}" class="adaptivesub tdTit adaptivelink"></td>
                 <td th:text="${subTask.description}" class="adaptivesub tdDesc adaptivelink"></td>
                 <td colspan="2" th:text="${#temporals.format(subTask.deadline, 'dd.MM.yyyy')}" style="text-align: center" class="adaptivesub tdDeadPrior adaptivelink"></td>
                 <td class="adaptivesub tdOper adaptivelink">
-                    <a th:href="@{updateTask/{id}(id=${subTask.id})}" class = "oper adaptivelink" style="margin-left: 12%; margin-bottom: 3px;">Изменить</a><br>
-                    <a href="#" class="oper adaptivelink" th:onclick="'confirmDelete(' + ${subTask.id} + ')'" style="margin-left: 16%;">Удалить</a>
+                    <a th:href="@{updateTask/{id}(id=${subTask.id})}" class = "oper adaptivelink" style="margin-left: 10%; margin-bottom: 3px;">Изменить</a><br>
+                    <a href="#" class="oper adaptivelink" th:onclick="'confirmDelete(' + ${subTask.id} + ')'" style="margin-left: 14%;">Удалить</a>
                 </td>
             </tr>
         </table>
@@ -119,7 +119,7 @@
         <td th:text="${#temporals.format(task.deadline, 'dd.MM.yyyy')}" class="tdDead adaptivelink" style="text-align: center"></td>
         <td th:text="${task.priority}" class="tdPrior adaptiveprior adaptivelink" style="text-align: center"></td>
         <td class = "tdOper3 adaptivelink">
-            <a href="#" class="oper adaptivelink" th:onclick="'confirmDelete(' + ${task.id} + ')'" >Удалить</a>
+            <a href="#" class="oper adaptivelink adaptlnkpk" th:onclick="'confirmDelete(' + ${task.id} + ')'" >Удалить</a>
         </td>
     </tr>
         <tr th:each="subTask : ${subTasks}" th:if="${subTask.ref_task == task.id}" class="completed-subtask toggle-row ad2" th:data-task-id="${task.id}">
@@ -128,7 +128,7 @@
             <td th:text="${subTask.description}" class="adaptivesub tdDesc adaptivelink"></td>
             <td th:text="${#temporals.format(subTask.deadline, 'dd.MM.yyyy')}" colspan="2" style="text-align: center" class="adaptivesub tdDeadPrior adaptivelink"></td>
             <td class="adaptivesub tdOper3 adaptivelink">
-                <a href="#" class="oper adaptivelink" th:onclick="'confirmDelete(' + ${subTask.id} + ')'" >Удалить</a>
+                <a href="#" class="oper adaptivelink adaptlnkpk" th:onclick="'confirmDelete(' + ${subTask.id} + ')'" >Удалить</a>
             </td>
         </tr>
     </table>

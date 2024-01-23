@@ -15,8 +15,8 @@
 </header>
 <body th:class="${darkDesign} ? 'dark-mode' : ''">
 <form action="/checkEmail" method="post" th:object="${curUser}" th:class="${darkDesign} ? 'dark adaptform2' : 'adaptform2'">
-    <b>ПАРОЛЬ</b> <input type="text" th:field="*{password}"/><span th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="error-message"></span><br><br>
-    <b>НОВАЯ ПОЧТА</b> <input type="text" id="newEmail" name="newEmail"><br><br>
+    <b>ПАРОЛЬ</b><br> <input type="text" th:field="*{password}"/><span th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="error-message"></span><br><br>
+    <b>НОВАЯ ПОЧТА</b><br> <input type="text" id="newEmail" name="newEmail"><br><br>
     <span th:if="${errorEmail}" class="error-message">Ошибка: неправильный пароль или неправильно введена новая почта</span><br>
     <input type="submit" value="СОХРАНИТЬ" class="marginsubmit"/>
 </form>
