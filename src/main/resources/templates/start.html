@@ -37,7 +37,7 @@
 <body th:class="${darkDesign} ? 'dark-mode' : ''">
 <h1 class="to_do_list">
     <span class="title-left"></span>
-    <span class="title-right">Пользователь: <span class="title-right">adminostasiya</span></span>
+    <span class="title-right">Пользователь: <span th:text="${session.user.username}" class="title-right"></span></span>
 </h1>
 <h1 class="to_do_list">
     <span class="title-left adaptiveh">Список дел</span></h1>

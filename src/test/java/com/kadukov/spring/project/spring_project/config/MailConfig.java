@@ -1,9 +1,5 @@
 package com.kadukov.spring.project.spring_project.config;
 
-import com.kadukov.spring.project.spring_project.entity.Setting;
-import com.kadukov.spring.project.spring_project.service.SettingService;
-import com.kadukov.spring.project.spring_project.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

@@ -1,7 +1,6 @@
 package com.kadukov.spring.project.spring_project.dao;
 
 import com.kadukov.spring.project.spring_project.entity.Setting;
-import com.kadukov.spring.project.spring_project.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 

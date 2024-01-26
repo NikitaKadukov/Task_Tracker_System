@@ -1,6 +1,5 @@
 package com.kadukov.spring.project.spring_project.dao;
 
-import com.kadukov.spring.project.spring_project.entity.Task;
 import com.kadukov.spring.project.spring_project.entity.User;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
