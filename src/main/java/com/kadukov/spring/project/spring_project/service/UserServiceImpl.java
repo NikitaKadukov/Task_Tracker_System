@@ -81,4 +81,10 @@ public class UserServiceImpl implements UserService{
         }
         return null;
     }
+
+    @Transactional
+    @Override
+    public void deleteUser(String name){
+        userDAO.deleteUser(name);
+    }
 }

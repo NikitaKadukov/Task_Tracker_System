@@ -11,14 +11,10 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 
 import java.util.Properties;
+
 @Configuration
 public class MailConfig {
 
-    @Autowired
-    UserService userService;
-
-    @Autowired
-    SettingService settingService;
 
     @Value("${spring.mail.host}")
     private String host;
@@ -38,8 +34,8 @@ public class MailConfig {
 
         mailSender.setHost(host);
         mailSender.setPort(port);
-        mailSender.setUsername(((Setting)settingService.getSetting("mail_login")).getValue_name());
-        mailSender.setPassword(((Setting)settingService.getSetting("mail_password")).getValue_name());
+        mailSender.setUsername("123");
+        mailSender.setPassword("123");
 
         Properties properties = mailSender.getJavaMailProperties();
 

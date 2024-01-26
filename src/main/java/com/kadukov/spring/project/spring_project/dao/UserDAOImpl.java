@@ -1,5 +1,6 @@
 package com.kadukov.spring.project.spring_project.dao;
 
+import com.kadukov.spring.project.spring_project.entity.Task;
 import com.kadukov.spring.project.spring_project.entity.User;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
@@ -39,6 +40,13 @@ public class UserDAOImpl implements UserDAO{
 
         List<User> userList = query.getResultList();
         return userList;
+    }
+
+    @Override
+    public void deleteUser(String name){
+        Query query = entityManager.createQuery("delete from User where username = :user");
+        query.setParameter("user", name);
+        query.executeUpdate();
     }
 
 }

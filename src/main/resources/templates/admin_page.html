@@ -39,6 +39,7 @@
                 <a th:if = "${curUser.role == 'admin' && user.role=='user'}" th:href="@{changeRole/{username}(username=${user.username})}" class = "oper adaptivelink">Сделать subAdmin'ом</a>
                 <a th:if = "${user.enabled==true}" th:href="@{blockUser/{username}(username=${user.username})}" class = "oper adaptivelink">Заблокировать</a>
                 <a th:if = "${user.enabled==false}" th:href="@{blockUser/{username}(username=${user.username})}" class = "oper adaptivelink">Разблокировать</a>
+                <a th:if = "${curUser.role == 'admin'}" th:href="@{deleteUser/{username}(username=${user.username})}" class = "oper adaptivelink">Удалить</a>
             </td>
         </tr>
     </tbody>

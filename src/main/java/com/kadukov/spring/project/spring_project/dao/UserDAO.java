@@ -11,4 +11,6 @@ public interface UserDAO {
 
     public List<User> getAllUsers(String role);
 
+    public void deleteUser(String name);
+
 }

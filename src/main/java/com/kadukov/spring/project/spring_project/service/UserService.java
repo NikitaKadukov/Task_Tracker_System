@@ -18,4 +18,6 @@ public interface UserService {
     public void blockUser(String name);
 
     public User whichEmail(String email);
+
+    public void deleteUser(String name);
 }

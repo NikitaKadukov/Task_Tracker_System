@@ -41,4 +41,14 @@ public class UserChangeController {
         return "redirect:/adminPage";
     }
 
+    @RequestMapping("/deleteUser/{name}")
+    public String deleteUser(@PathVariable String name){
+        User user = (User)httpSession.getAttribute("user");
+        if(!user.getRole().equals("admin")){
+            return "redirect:/";
+        }
+        userService.deleteUser(name);
+        return "redirect:/adminPage";
+    }
+
 }

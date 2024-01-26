@@ -1,7 +1,9 @@
 package com.kadukov.spring.project.spring_project.controller;
 
+import com.kadukov.spring.project.spring_project.entity.Setting;
 import com.kadukov.spring.project.spring_project.entity.User;
 import com.kadukov.spring.project.spring_project.service.MailSender;
+import com.kadukov.spring.project.spring_project.service.SettingService;
 import com.kadukov.spring.project.spring_project.service.UserService;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
@@ -22,6 +24,9 @@ public class MenuController {
 
     @Autowired
     private MailSender mailSender;
+
+    @Autowired
+    private SettingService settingService;
 
     @RequestMapping("/")
     public String menu_page(){
