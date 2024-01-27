@@ -1,5 +1,6 @@
 package com.kadukov.spring.project.spring_project.controller;
 
+import com.kadukov.spring.project.spring_project.entity.Setting;
 import com.kadukov.spring.project.spring_project.entity.User;
 import com.kadukov.spring.project.spring_project.service.MailSender;
 import com.kadukov.spring.project.spring_project.service.SettingService;

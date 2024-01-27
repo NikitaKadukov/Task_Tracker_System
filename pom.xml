@@ -45,11 +45,11 @@
             <artifactId>spring-boot-devtools</artifactId>
         </dependency>
 
-        <!--<dependency>
+        <dependency>
             <groupId>com.mysql</groupId>
             <artifactId>mysql-connector-j</artifactId>
             <scope>runtime</scope>
-        </dependency>-->
+        </dependency>
 
         <dependency>
             <groupId>com.h2database</groupId>
